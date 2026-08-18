@@ -2,1082 +2,578 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               viewport-fit=cover">
+
+<meta name="theme-color" content="#0b0f18">
 
 <title>Neptunus — Veritas Educational</title>
 
 <style>
 
+/* =========================================================
+   NEPTUNUS — VERITAS EDUCATIONAL
+   Part 1/4 — Foundation + Responsive Design System
+   ========================================================= */
+
+/* ---------- Design tokens ---------- */
+
 :root {
-    --background: #090d16;
-    --surface: #101725;
-    --surface-2: #141c2c;
-    --surface-hover: #1a2437;
+  --bg: #0b0f18;
+  --bg-soft: #101622;
+  --panel: #111827;
+  --panel-soft: #151c2b;
 
-    --border: #273249;
-    --border-soft: rgba(255,255,255,0.07);
+  --border: #273247;
+  --border-soft: #202a3c;
 
-    --text: #f3f6ff;
-    --text-secondary: #a9b4c8;
-    --text-muted: #707c91;
+  --text: #f3f6ff;
+  --text-soft: #aeb8cc;
+  --text-muted: #71809a;
 
-    --accent: #7c4dff;
-    --accent-light: #a78bfa;
-    --accent-soft: rgba(124,77,255,0.14);
+  --purple: #8b5cf6;
+  --purple-soft: #a78bfa;
 
-    --blue: #4f8cff;
-    --green: #42c88a;
-    --orange: #ff9d42;
-    --cyan: #42c7d6;
+  --blue: #60a5fa;
+  --green: #6ee7a0;
+  --orange: #f6a44d;
+  --cyan: #67d8e8;
 
-    --shadow: 0 20px 50px rgba(0,0,0,0.25);
+  --sidebar-width: 305px;
 
-    --radius: 16px;
+  --radius-large: 22px;
+  --radius-medium: 16px;
+  --radius-small: 10px;
+
+  --shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
-/* -----------------------------
-   RESET
------------------------------ */
+
+/* ---------- Reset ---------- */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+  scroll-behavior: smooth;
 }
 
 body {
-    min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 75% 0%,
-            rgba(124,77,255,0.08),
-            transparent 35%
-        ),
-        var(--background);
+  min-height: 100vh;
 
-    color: var(--text);
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(99, 102, 241, 0.08),
+      transparent 35%
+    ),
+    var(--bg);
 
-    font-family:
-        "Segoe UI",
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif;
+  color: var(--text);
 
-    overflow-x: hidden;
+  font-family:
+    "Segoe UI",
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  line-height: 1.5;
+
+  overflow-x: hidden;
 }
 
 button,
 input {
-    font: inherit;
+  font: inherit;
 }
 
-/* -----------------------------
-   APP LAYOUT
------------------------------ */
+button {
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   APPLICATION SHELL
+   ========================================================= */
 
 .app {
-    min-height: 100vh;
-    display: flex;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
 }
 
-/* -----------------------------
+
+/* =========================================================
    SIDEBAR
------------------------------ */
+   ========================================================= */
 
 .sidebar {
-    width: 255px;
-    min-height: 100vh;
+  position: fixed;
+  inset: 0 auto 0 0;
 
-    background: rgba(13,18,29,0.96);
+  width: var(--sidebar-width);
 
-    border-right: 1px solid var(--border-soft);
+  padding: 32px 22px;
 
-    padding: 22px 16px;
+  background: rgba(11, 15, 24, 0.96);
 
-    display: flex;
-    flex-direction: column;
+  border-right: 1px solid var(--border-soft);
 
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+  z-index: 100;
 
-    z-index: 20;
-    overflow-y: auto;
-    overflow-x: hidden;
+  overflow-y: auto;
+
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease;
 }
 
-/* Brand */
+
+/* ---------- Brand ---------- */
 
 .brand {
-    padding: 4px 10px 22px;
-}
-
-.brand-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-icon {
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #ffb63e;
-
-    font-size: 25px;
+  padding: 8px 14px 28px;
 }
 
 .brand-name {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brand-symbol {
+  color: #f4b942;
+  font-size: 31px;
 }
 
 .brand-subtitle {
-    margin-top: 8px;
+  margin-top: 14px;
 
-    color: var(--text-secondary);
+  color: var(--text-soft);
 
-    font-size: 13px;
-    line-height: 1.5;
-
-    max-width: 190px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* Navigation */
+
+/* ---------- Navigation ---------- */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
 .nav-section {
-    margin-top: 5px;
+  margin-top: 24px;
 }
 
-.nav-item {
-    width: 100%;
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 
-    display: flex;
-    align-items: center;
-    gap: 13px;
+  width: 100%;
 
-    padding: 11px 12px;
+  padding: 14px 16px;
 
-    margin-bottom: 4px;
+  border: 1px solid transparent;
+  border-radius: 14px;
 
-    border-radius: 10px;
+  color: var(--text-soft);
 
-    color: var(--text-secondary);
+  font-size: 17px;
 
-    text-decoration: none;
+  cursor: pointer;
 
-    font-size: 15px;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.nav-item:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-    transform: translateX(2px);
+.nav-link:hover {
+  background: rgba(139, 92, 246, 0.08);
+  color: var(--text);
 }
 
-.nav-item.active {
-    background: var(--accent-soft);
-    color: #a98cff;
+.nav-link.active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 92, 246, 0.18),
+      rgba(99, 102, 241, 0.10)
+    );
 
-    box-shadow:
-        inset 0 0 0 1px rgba(124,77,255,0.16);
+  border-color: rgba(139, 92, 246, 0.35);
+
+  color: var(--purple-soft);
 }
 
 .nav-icon {
-    width: 22px;
-    text-align: center;
-    font-size: 17px;
+  width: 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  flex-shrink: 0;
 }
 
-.nav-divider {
-    height: 1px;
-    background: var(--border-soft);
-    margin: 17px 10px;
-}
 
-/* Bottom profile */
-
-.sidebar-bottom {
-    margin-top: auto;
-    padding-top: 18px;
-    flex-shrink: 0;
-}
-
-.profile {
-    padding: 11px;
-
-    border: 1px solid var(--border-soft);
-
-    background: rgba(255,255,255,0.025);
-
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    cursor: pointer;
-
-    transition: background 0.2s ease;
-}
-
-.profile:hover {
-    background: rgba(255,255,255,0.05);
-}
-
-.profile:focus-visible {
-    outline: 2px solid var(--accent-light);
-    outline-offset: 2px;
-}
-
-.avatar {
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8b6cff,
-            #5d43c7
-        );
-
-    color: white;
-
-    font-weight: 700;
-}
-
-.profile-info {
-    flex: 1;
-}
-
-.profile-name {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.profile-role {
-    margin-top: 2px;
-
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.profile-arrow {
-    color: var(--text-muted);
-}
-
-/* -----------------------------
-   MAIN
------------------------------ */
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
 
 .main {
-    width: calc(100% - 255px);
+  width: calc(100% - var(--sidebar-width));
 
-    margin-left: 255px;
+  margin-left: var(--sidebar-width);
 
-    padding: 28px 34px 30px;
+  min-width: 0;
 
-    min-height: 100vh;
+  padding: 34px clamp(22px, 4vw, 58px) 50px;
 }
 
-/* -----------------------------
-   TOP BAR
------------------------------ */
+
+/* ---------- Top bar ---------- */
 
 .topbar {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    gap: 20px;
+  gap: 24px;
 
-    margin-bottom: 30px;
-}
-
-.welcome {
-    flex: 1;
+  margin-bottom: 30px;
 }
 
 .welcome h1 {
-    font-size: 27px;
-    font-weight: 650;
-
-    letter-spacing: -0.4px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.15;
 }
 
 .welcome p {
-    margin-top: 7px;
+  margin-top: 8px;
 
-    color: var(--text-secondary);
+  color: var(--text-soft);
 
-    font-size: 15px;
+  font-size: 17px;
 }
 
-/* Search */
+
+/* ---------- Search ---------- */
 
 .search {
-    width: 300px;
+  position: relative;
 
-    position: relative;
+  width: min(100%, 440px);
 }
 
 .search input {
-    width: 100%;
+  width: 100%;
 
-    padding: 13px 16px 13px 43px;
+  padding: 14px 18px 14px 46px;
 
-    background: var(--surface);
+  background: var(--panel);
 
-    border: 1px solid var(--border);
+  border: 1px solid var(--border);
 
-    border-radius: 11px;
+  border-radius: 14px;
 
-    outline: none;
+  color: var(--text);
 
-    color: var(--text);
+  outline: none;
 
-    font-size: 14px;
-
-    transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .search input::placeholder {
-    color: var(--text-muted);
+  color: var(--text-muted);
 }
 
 .search input:focus {
-    border-color: rgba(124,77,255,0.6);
+  border-color: var(--purple);
 
-    box-shadow:
-        0 0 0 3px rgba(124,77,255,0.1);
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.12);
 }
 
 .search-icon {
-    position: absolute;
+  position: absolute;
 
-    left: 15px;
-    top: 50%;
+  left: 17px;
+  top: 50%;
 
-    transform: translateY(-50%);
+  transform: translateY(-50%);
 
-    color: var(--text-muted);
+  color: var(--text-muted);
 
-    font-size: 17px;
+  pointer-events: none;
 }
 
-/* Top actions */
+
+/* ---------- Top actions ---------- */
 
 .top-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .icon-button {
-    width: 43px;
-    height: 43px;
+  width: 48px;
+  height: 48px;
 
-    border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-    border: 1px solid var(--border);
+  background: var(--panel);
 
-    background: var(--surface);
+  border: 1px solid var(--border);
 
-    color: var(--text-secondary);
+  border-radius: 14px;
 
-    cursor: pointer;
+  color: var(--text-soft);
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .icon-button:hover {
-    background: var(--surface-hover);
-    color: var(--text);
+  background: var(--panel-soft);
+  border-color: var(--purple);
+  transform: translateY(-1px);
 }
 
-/* -----------------------------
-   QUICK CARDS
------------------------------ */
 
-.quick-grid {
-    display: grid;
+/* ---------- Mobile menu ---------- */
 
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-bottom: 27px;
+.mobile-menu {
+  display: none;
 }
 
-.quick-card {
-    min-height: 220px;
 
-    padding: 22px;
+/* =========================================================
+   GENERAL RESPONSIVE HELPERS
+   ========================================================= */
 
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s ease,
-        border 0.2s ease,
-        background 0.2s ease;
+.desktop-only {
+  display: block;
 }
 
-.quick-card:hover {
-    transform: translateY(-3px);
-
-    background: var(--surface-2);
-
-    border-color:
-        rgba(255,255,255,0.15);
+.mobile-only {
+  display: none;
 }
 
-.quick-card::after {
-    content: "";
 
-    position: absolute;
+/* =========================================================
+   TABLET / SMALL LAPTOP
+   ========================================================= */
 
-    width: 110px;
-    height: 110px;
+@media (max-width: 1100px) {
 
-    right: -50px;
-    top: -50px;
+  :root {
+    --sidebar-width: 250px;
+  }
 
-    border-radius: 50%;
+  .sidebar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-    background: var(--card-glow);
+  .main {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
 
-    filter: blur(25px);
+  .brand-name {
+    font-size: 24px;
+  }
 
-    opacity: 0.18;
+  .nav-link {
+    font-size: 15px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .search {
+    order: 3;
+    width: 100%;
+    max-width: none;
+  }
 }
 
-.quick-icon {
-    font-size: 32px;
 
-    margin-bottom: 20px;
-}
+/* =========================================================
+   MOBILE / Z13 PORTRAIT / SMALL SCREENS
+   ========================================================= */
 
-.quick-card h2 {
-    font-size: 18px;
-    font-weight: 650;
-}
+@media (max-width: 760px) {
 
-.quick-card p {
-    margin-top: 8px;
+  .sidebar {
+    width: min(82vw, 320px);
 
-    min-height: 40px;
+    transform: translateX(-105%);
 
-    color: var(--text-secondary);
+    box-shadow:
+      20px 0 60px rgba(0, 0, 0, 0.45);
+  }
 
-    font-size: 13px;
+  .sidebar.open {
+    transform: translateX(0);
+  }
 
-    line-height: 1.5;
-}
+  .main {
+    width: 100%;
+    margin-left: 0;
 
-.card-button {
-    margin-top: 17px;
+    padding:
+      20px
+      max(20px, env(safe-area-inset-right))
+      40px
+      max(20px, env(safe-area-inset-left));
+  }
 
-    padding: 9px 15px;
+  .mobile-menu {
+    display: inline-flex;
+  }
 
-    border-radius: 8px;
+  .desktop-only {
+    display: none;
+  }
 
-    background: transparent;
+  .mobile-only {
+    display: block;
+  }
 
-    border: 1px solid var(--card-accent);
+  .topbar {
+    align-items: flex-start;
+  }
 
-    color: var(--card-accent);
-
-    cursor: pointer;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.card-button:hover {
-    background: var(--card-accent);
-    color: #090d16;
-}
-
-.card-purple {
-    --card-accent: #a78bfa;
-    --card-glow: #7c4dff;
-}
-
-.card-blue {
-    --card-accent: #5d9bff;
-    --card-glow: #367cff;
-}
-
-.card-green {
-    --card-accent: #59c98e;
-    --card-glow: #42c88a;
-}
-
-.card-orange {
-    --card-accent: #ffab5d;
-    --card-glow: #ff8b2c;
-}
-
-.card-cyan {
-    --card-accent: #50cbd8;
-    --card-glow: #36c6d6;
-}
-
-/* -----------------------------
-   CONTENT GRID
------------------------------ */
-
-.content-grid {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        330px;
-
-    gap: 24px;
-}
-
-/* Section */
-
-.section {
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-
-    padding: 22px;
-}
-
-.section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-}
-
-.section-header h2 {
-    font-size: 18px;
-    font-weight: 650;
-}
-
-.section-link {
-    border: none;
-    background: transparent;
-
-    color: var(--accent-light);
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-/* -----------------------------
-   LEARNING PATHS
------------------------------ */
-
-.learning-paths {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 12px;
-}
-
-.path {
-    padding: 17px;
-
-    border-radius: 12px;
-
-    border: 1px solid var(--border-soft);
-
-    background: rgba(255,255,255,0.025);
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-.path:hover {
-    background: var(--surface-hover);
-    transform: translateY(-2px);
-}
-
-.path-icon {
-    font-size: 25px;
-
-    margin-bottom: 16px;
-}
-
-.path h3 {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.path p {
-    margin-top: 5px;
-
-    color: var(--text-muted);
-
-    font-size: 12px;
-}
-
-/* Progress */
-
-.progress-row {
-    margin-top: 17px;
-
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.progress-bar {
-    height: 6px;
-
+  .welcome {
     flex: 1;
+  }
 
-    background: #242d3e;
+  .welcome h1 {
+    font-size: 29px;
+  }
 
-    border-radius: 10px;
+  .welcome p {
+    font-size: 15px;
+  }
 
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-
-    border-radius: 10px;
-
-    background: var(--path-color);
-
-    width: 0;
-}
-
-.progress-number {
-    color: var(--text-secondary);
-
-    font-size: 11px;
-
-    white-space: nowrap;
-}
-
-.path-button {
+  .top-actions {
     width: 100%;
+  }
 
-    margin-top: 14px;
-
-    padding: 8px;
-
-    border-radius: 7px;
-
-    border: 1px solid var(--border);
-
-    background: transparent;
-
-    color: var(--text-secondary);
-
-    cursor: pointer;
-
-    font-size: 12px;
-}
-
-.path-button:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-}
-
-/* -----------------------------
-   RIGHT COLUMN
------------------------------ */
-
-.right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Nepo */
-
-.nepo {
-    padding: 22px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(124,77,255,0.15),
-            transparent 45%
-        ),
-        var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-}
-
-.nepo-top {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-}
-
-.nepo-avatar {
-    width: 50px;
-    height: 50px;
-
-    border-radius: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #9181ff,
-            #5840c7
-        );
-
-    font-size: 27px;
-}
-
-.nepo-title {
-    font-size: 16px;
-    font-weight: 650;
-}
-
-.online {
-    margin-top: 4px;
-
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    color: var(--text-muted);
-
-    font-size: 12px;
-}
-
-.online-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: var(--green);
-
-    box-shadow:
-        0 0 8px rgba(66,200,138,0.5);
-}
-
-.nepo p {
-    margin-top: 18px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-
-    line-height: 1.55;
-}
-
-.nepo-button {
+  .search {
     width: 100%;
-
-    margin-top: 17px;
-
-    padding: 11px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c4dff,
-            #6340d4
-        );
-
-    color: white;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.nepo-button:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 25px rgba(124,77,255,0.25);
-}
-
-/* Daily Goal */
-
-.goal {
-    padding: 22px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-}
-
-.goal h2 {
-    font-size: 16px;
-}
-
-.goal p {
-    margin-top: 9px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
+  }
 }
 
 
-.goal-count {
-    margin-top: 9px;
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
 
-    color: var(--text-muted);
+@media (max-width: 430px) {
 
-    font-size: 12px;
+  .main {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .welcome h1 {
+    font-size: 25px;
+  }
+
+  .welcome p {
+    font-size: 14px;
+  }
+
+  .icon-button {
+    width: 44px;
+    height: 44px;
+  }
 }
 
-/* -----------------------------
-   RECOMMENDATION
------------------------------ */
 
-.recommendation {
-    margin-top: 22px;
+/* =========================================================
+   LANDSCAPE MOBILE / SMALL TABLETS
+   ========================================================= */
 
-    padding: 20px 22px;
+@media (
+  max-height: 600px
+) and (
+  orientation: landscape
+) {
 
-    border-radius: var(--radius);
+  .sidebar {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
 
-    border: 1px solid rgba(124,77,255,0.22);
+  .brand {
+    padding-bottom: 12px;
+  }
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(124,77,255,0.10),
-            rgba(124,77,255,0.025)
-        );
+  .brand-subtitle {
+    margin-top: 6px;
+  }
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
+  .nav-link {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
 }
 
-.recommendation-label {
-    color: var(--accent-light);
 
-    font-size: 13px;
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
 
-    font-weight: 650;
+@media (prefers-reduced-motion: reduce) {
 
-    margin-bottom: 7px;
-}
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
 
-.recommendation-text {
-    color: var(--text-secondary);
-
-    font-size: 13px;
-}
-
-.recommendation-button {
-    flex-shrink: 0;
-
-    padding: 10px 17px;
-
-    border-radius: 8px;
-
-    border: 1px solid rgba(167,139,250,0.35);
-
-    background: transparent;
-
-    color: var(--accent-light);
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-.recommendation-button:hover {
-    background: var(--accent-soft);
-}
-
-/* -----------------------------
-   FOOTER
------------------------------ */
-
-.footer {
-    margin-top: 28px;
-
-    display: flex;
-    justify-content: space-between;
-
-    color: var(--text-muted);
-
-    font-size: 11px;
-}
-
-.footer-links {
-    display: flex;
-    gap: 18px;
-}
-
-.footer a {
-    color: var(--text-muted);
-
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: var(--text-secondary);
-}
-
-/* -----------------------------
-   RESPONSIVE
------------------------------ */
-
-@media (max-width: 1250px) {
-
-    .quick-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-    .learning-paths {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-}
-
-@media (max-width: 950px) {
-
-    .sidebar {
-        width: 78px;
-        padding: 18px 10px;
-    }
-
-    .brand-subtitle,
-    .brand-name,
-    .nav-item span:not(.nav-icon),
-    .profile-info,
-    .profile-arrow {
-        display: none;
-    }
-
-    .brand {
-        padding-left: 10px;
-    }
-
-    .nav-item {
-        justify-content: center;
-    }
-
-    .main {
-        width: calc(100% - 78px);
-        margin-left: 78px;
-        padding: 24px;
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-@media (max-width: 700px) {
-
-    .main {
-        padding: 18px;
-    }
-
-    .topbar {
-        flex-wrap: wrap;
-    }
-
-    .welcome {
-        width: 100%;
-        flex-basis: 100%;
-    }
-
-    .search {
-        flex: 1;
-        width: auto;
-    }
-
-    .quick-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-card {
-        min-height: 190px;
-    }
-
-    .learning-paths {
-        grid-template-columns: 1fr;
-    }
-
-    .recommendation {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer {
-        flex-direction: column;
-        gap: 10px;
-    }
-
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 </style>
@@ -1087,636 +583,1554 @@ input {
 
 <div class="app">
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
+      <!-- =====================================================
+       SIDEBAR
+       ===================================================== -->
 
-    <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
 
-        <div class="brand">
+    <div class="brand">
+      <div class="brand-name">
+        <span class="brand-symbol">♆</span>
+        <span>NEPTUNUS</span>
+      </div>
 
-            <div class="brand-row">
+      <div class="brand-subtitle">
+        Your Adaptive Learning<br>
+        Companion
+      </div>
+    </div>
 
-                <div class="brand-icon">♆</div>
 
-                <div class="brand-name">
-                    NEPTUNUS
-                </div>
+    <nav class="nav" aria-label="Main navigation">
 
-            </div>
+      <a href="#" class="nav-link active">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+      </a>
 
-            <div class="brand-subtitle">
-                Your Adaptive Learning Companion
-            </div>
+      <a href="#" class="nav-link">
+        <span class="nav-icon">▷</span>
+        <span>Continue Learning</span>
+      </a>
+
+      <a href="#" class="nav-link">
+        <span class="nav-icon">▣</span>
+        <span>My Learning</span>
+      </a>
+
+      <a href="#" class="nav-link">
+        <span class="nav-icon">🔖</span>
+        <span>Saved Knowledge</span>
+      </a>
+
+      <a href="#" class="nav-link">
+        <span class="nav-icon">▥</span>
+        <span>Progress</span>
+      </a>
+
+      <a href="#" class="nav-link">
+        <span class="nav-icon">◌</span>
+        <span>Ask Neptunus</span>
+      </a>
+
+
+      <div class="nav-section">
+
+        <a href="#" class="nav-link">
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span class="nav-icon">♟</span>
+          <span>Account</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span class="nav-icon">▣</span>
+          <span>Privacy</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span class="nav-icon">?</span>
+          <span>Help &amp; Support</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+
+    <!-- =================================================
+         PROFILE
+         ================================================= -->
+
+    <div class="profile-card">
+
+      <div class="profile-avatar">
+        J
+      </div>
+
+      <div class="profile-info">
+        <strong>Jace</strong>
+        <span>Learner</span>
+      </div>
+
+      <button
+        class="profile-menu"
+        type="button"
+        aria-label="Open profile menu"
+      >
+        ˅
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+
+  <main class="main">
+
+    <!-- Mobile navigation button -->
+    <button
+      class="icon-button mobile-menu"
+      id="mobileMenu"
+      type="button"
+      aria-label="Open navigation"
+      aria-controls="sidebar"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+
+    <!-- =================================================
+         TOP BAR
+         ================================================= -->
+
+    <header class="topbar">
+
+      <div class="welcome">
+
+        <h1>
+          Welcome back, Jace! 👋
+        </h1>
+
+        <p>
+          What would you like to learn today?
+        </p>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <div class="search">
+
+          <span class="search-icon">⌕</span>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search anything..."
+            aria-label="Search"
+          >
 
         </div>
 
 
-        <nav class="nav-section">
-
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">⌂</span>
-                <span>Home</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▷</span>
-                <span>Continue Learning</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▣</span>
-                <span>My Learning</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">🔖</span>
-                <span>Saved Knowledge</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▥</span>
-                <span>Progress</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">◌</span>
-                <span>Ask Neptunus</span>
-            </a>
-
-        </nav>
+        <button
+          class="icon-button"
+          type="button"
+          aria-label="Notifications"
+        >
+          ♧
+        </button>
 
 
-        <div class="nav-divider"></div>
+        <button
+          class="icon-button"
+          type="button"
+          aria-label="Neptunus Assistant"
+        >
+          🤖
+        </button>
+
+      </div>
+
+    </header>
+
+        <!-- =================================================
+         QUICK ACTION CARDS
+         ================================================= -->
+
+    <section class="quick-grid">
+
+      <!-- Continue Learning -->
+      <article class="action-card purple">
+
+        <div class="card-icon">📖</div>
+
+        <h2>Continue Learning</h2>
+
+        <p>
+          Pick up where you left off.
+        </p>
+
+        <button class="action-button" type="button">
+          Continue
+        </button>
+
+      </article>
 
 
-        <nav>
+      <!-- Ask Neptunus -->
+      <article class="action-card blue">
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">⚙</span>
-                <span>Settings</span>
-            </a>
+        <div class="card-icon">🤖</div>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">♙</span>
-                <span>Account</span>
-            </a>
+        <h2>Ask Neptunus</h2>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▣</span>
-                <span>Privacy</span>
-            </a>
+        <p>
+          Get answers and explanations.
+        </p>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">?</span>
-                <span>Help & Support</span>
-            </a>
+        <button class="action-button" type="button">
+          Ask Now
+        </button>
 
-        </nav>
+      </article>
 
 
-        <div class="sidebar-bottom">
+      <!-- My Learning -->
+      <article class="action-card green">
 
-            <button class="profile" type="button" aria-label="Open Jace profile menu">
+        <div class="card-icon">🎓</div>
 
-                <div class="avatar">
-                    J
-                </div>
+        <h2>My Learning</h2>
 
-                <div class="profile-info">
+        <p>
+          View your courses and learning paths.
+        </p>
 
-                    <div class="profile-name">
-                        Jace
-                    </div>
+        <button class="action-button" type="button">
+          Open
+        </button>
 
-                    <div class="profile-role">
-                        Student
-                    </div>
+      </article>
 
-                </div>
 
-                <div class="profile-arrow">
-                    ˅
-                </div>
+      <!-- My Progress -->
+      <article class="action-card orange">
 
+        <div class="card-icon">📊</div>
+
+        <h2>My Progress</h2>
+
+        <p>
+          Track your growth and achievements.
+        </p>
+
+        <button class="action-button" type="button">
+          View Progress
+        </button>
+
+      </article>
+
+
+      <!-- Saved Knowledge -->
+      <article class="action-card cyan">
+
+        <div class="card-icon">🔖</div>
+
+        <h2>Saved Knowledge</h2>
+
+        <p>
+          Your saved notes and resources.
+        </p>
+
+        <button class="action-button" type="button">
+          Open
+        </button>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================
+         LEARNING AREA
+         ================================================= -->
+
+    <section class="dashboard-grid">
+
+
+      <!-- =================================================
+           LEARNING PATHS
+           ================================================= -->
+
+      <section class="learning-panel">
+
+        <div class="section-heading">
+
+          <h2>Your Learning Paths</h2>
+
+          <button
+            class="text-button"
+            type="button"
+          >
+            View all
+          </button>
+
+        </div>
+
+
+        <div class="learning-paths">
+
+
+          <!-- ICT & Infrastructure -->
+          <article class="learning-card">
+
+            <div class="learning-icon">
+              🛰️
+            </div>
+
+            <h3>
+              ICT &amp;<br>
+              Infrastructure
+            </h3>
+
+            <p>
+              Networking Basics
+            </p>
+
+            <div class="learning-status">
+              <span class="status-line"></span>
+              <span>Not started</span>
+            </div>
+
+            <button
+              class="small-button"
+              type="button"
+            >
+              Continue
             </button>
 
+          </article>
+
+
+          <!-- Networking -->
+          <article class="learning-card">
+
+            <div class="learning-icon">
+              🌐
+            </div>
+
+            <h3>
+              Networking
+            </h3>
+
+            <p>
+              Network Fundamentals
+            </p>
+
+            <div class="learning-status">
+              <span class="status-line"></span>
+              <span>Not started</span>
+            </div>
+
+            <button
+              class="small-button"
+              type="button"
+            >
+              Continue
+            </button>
+
+          </article>
+
+
+          <!-- Programming -->
+          <article class="learning-card">
+
+            <div class="learning-icon">
+              💻
+            </div>
+
+            <h3>
+              Programming
+            </h3>
+
+            <p>
+              Programming Fundamentals
+            </p>
+
+            <div class="learning-status">
+              <span class="status-line"></span>
+              <span>Not started</span>
+            </div>
+
+            <button
+              class="small-button"
+              type="button"
+            >
+              Continue
+            </button>
+
+          </article>
+
+
+          <!-- Cybersecurity -->
+          <article class="learning-card">
+
+            <div class="learning-icon">
+              🛡️
+            </div>
+
+            <h3>
+              Cybersecurity
+            </h3>
+
+            <p>
+              Security Fundamentals
+            </p>
+
+            <div class="learning-status">
+              <span class="status-line"></span>
+              <span>Not started</span>
+            </div>
+
+            <button
+              class="small-button"
+              type="button"
+            >
+              Continue
+            </button>
+
+          </article>
+
+
         </div>
 
-    </aside>
+      </section>
 
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+      <!-- =================================================
+           NEPTUNUS ASSISTANT
+           ================================================= -->
 
-    <main class="main">
+      <aside class="assistant-card">
 
+        <div class="assistant-header">
 
-        <!-- TOP BAR -->
+          <div class="assistant-avatar">
+            🤖
+          </div>
 
-        <header class="topbar">
+          <div>
+            <h2>Neptunus Assistant</h2>
 
-            <div class="welcome">
-
-                <h1>
-                    Welcome back, Jace! 👋
-                </h1>
-
-                <p>
-                    What would you like to learn today?
-                </p>
-
-            </div>
-
-
-            <div class="search">
-
-                <span class="search-icon">
-                    ⌕
-                </span>
-
-                <input
-                    type="text"
-                    placeholder="Search anything..."
-                    aria-label="Search"
-                >
-
-            </div>
-
-
-            <div class="top-actions">
-
-                <button
-                    class="icon-button"
-                    title="Notifications"
-                >
-                    ♧
-                </button>
-
-                <button
-                    class="icon-button"
-                    title="Neptunus"
-                >
-                    🤖
-                </button>
-
-            </div>
-
-        </header>
-
-
-        <!-- QUICK ACTIONS -->
-
-        <section class="quick-grid">
-
-
-            <article class="quick-card card-purple">
-
-                <div class="quick-icon">
-                    📖
-                </div>
-
-                <h2>
-                    Continue Learning
-                </h2>
-
-                <p>
-                    Pick up where you left off.
-                </p>
-
-                <button class="card-button">
-                    Continue
-                </button>
-
-            </article>
-
-
-            <article class="quick-card card-blue">
-
-                <div class="quick-icon">
-                    🤖
-                </div>
-
-                <h2>
-                    Ask Neptunus
-                </h2>
-
-                <p>
-                    Get answers and explanations.
-                </p>
-
-                <button class="card-button">
-                    Ask Now
-                </button>
-
-            </article>
-
-
-            <article class="quick-card card-green">
-
-                <div class="quick-icon">
-                    🎓
-                </div>
-
-                <h2>
-                    My Learning
-                </h2>
-
-                <p>
-                    View your courses and learning paths.
-                </p>
-
-                <button class="card-button">
-                    Open
-                </button>
-
-            </article>
-
-
-            <article class="quick-card card-orange">
-
-                <div class="quick-icon">
-                    📊
-                </div>
-
-                <h2>
-                    My Progress
-                </h2>
-
-                <p>
-                    Track your growth and achievements.
-                </p>
-
-                <button class="card-button">
-                    View Progress
-                </button>
-
-            </article>
-
-
-            <article class="quick-card card-cyan">
-
-                <div class="quick-icon">
-                    🔖
-                </div>
-
-                <h2>
-                    Saved Knowledge
-                </h2>
-
-                <p>
-                    Your saved notes and resources.
-                </p>
-
-                <button class="card-button">
-                    Open
-                </button>
-
-            </article>
-
-
-        </section>
-
-
-        <!-- CONTENT -->
-
-        <div class="content-grid">
-
-
-            <!-- LEFT -->
-
-            <div>
-
-
-                <section class="section">
-
-                    <div class="section-header">
-
-                        <h2>
-                            Your Learning Paths
-                        </h2>
-
-                        <button class="section-link">
-                            View all
-                        </button>
-
-                    </div>
-
-
-                    <div class="learning-paths">
-
-
-                        <!-- ICT -->
-
-                        <article
-                            class="path"
-                            style="--path-color:#8b6cff;"
-                        >
-
-                            <div class="path-icon">
-                                📡
-                            </div>
-
-                            <h3>
-                                ICT & Infrastructure
-                            </h3>
-
-                            <p>
-                                Networking Basics
-                            </p>
-
-                            <div class="progress-row">
-
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-
-                                <span class="progress-number">
-                                    Not started
-                                </span>
-
-                            </div>
-
-                            <button class="path-button">
-                                Continue
-                            </button>
-
-                        </article>
-
-
-                        <!-- NETWORKING -->
-
-                        <article
-                            class="path"
-                            style="--path-color:#4f8cff;"
-                        >
-
-                            <div class="path-icon">
-                                🌐
-                            </div>
-
-                            <h3>
-                                Networking
-                            </h3>
-
-                            <p>
-                                Network Fundamentals
-                            </p>
-
-                            <div class="progress-row">
-
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-
-                                <span class="progress-number">
-                                    Not started
-                                </span>
-
-                            </div>
-
-                            <button class="path-button">
-                                Continue
-                            </button>
-
-                        </article>
-
-
-                        <!-- PROGRAMMING -->
-
-                        <article
-                            class="path"
-                            style="--path-color:#ff9d42;"
-                        >
-
-                            <div class="path-icon">
-                                💻
-                            </div>
-
-                            <h3>
-                                Programming
-                            </h3>
-
-                            <p>
-                                Programming Fundamentals
-                            </p>
-
-                            <div class="progress-row">
-
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-
-                                <span class="progress-number">
-                                    Not started
-                                </span>
-
-                            </div>
-
-                            <button class="path-button">
-                                Continue
-                            </button>
-
-                        </article>
-
-
-                        <!-- CYBERSECURITY -->
-
-                        <article
-                            class="path"
-                            style="--path-color:#42c88a;"
-                        >
-
-                            <div class="path-icon">
-                                🛡️
-                            </div>
-
-                            <h3>
-                                Cybersecurity
-                            </h3>
-
-                            <p>
-                                Security Fundamentals
-                            </p>
-
-                            <div class="progress-row">
-
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-
-                                <span class="progress-number">
-                                    Not started
-                                </span>
-
-                            </div>
-
-                            <button class="path-button">
-                                Continue
-                            </button>
-
-                        </article>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- RECOMMENDATION -->
-
-                <section class="recommendation">
-
-                    <div>
-
-                        <div class="recommendation-label">
-                            Today's Recommendation
-                        </div>
-
-                        <div class="recommendation-text">
-                            Continue your learning journey and explore your next topic.
-                        </div>
-
-                    </div>
-
-                    <button class="recommendation-button">
-                        Continue Learning
-                    </button>
-
-                </section>
-
-
-            </div>
-
-
-            <!-- RIGHT -->
-
-            <aside class="right-column">
-
-
-                <!-- NEPO -->
-
-                <section class="nepo">
-
-                    <div class="nepo-top">
-
-                        <div class="nepo-avatar">
-                            🤖
-                        </div>
-
-                        <div>
-
-                            <div class="nepo-title">
-                                Neptunus Assistant
-                            </div>
-
-                            <div class="online">
-
-                                <span class="online-dot"></span>
-
-                                Available
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <p>
-                        Your learning companion is ready to help
-                        you understand concepts, explore ideas,
-                        and continue your learning journey.
-                    </p>
-
-
-                    <button class="nepo-button">
-                        Start a conversation
-                    </button>
-
-                </section>
-
-
-                <!-- DAILY GOAL -->
-
-                <section class="goal">
-
-                    <h2>
-                        Daily Goal
-                    </h2>
-
-                    <p>
-                        Keep building your knowledge step by step.
-                    </p>
-
-                    <div class="goal-count">
-                        No activity recorded yet
-                    </div>
-
-                </section>
-
-
-            </aside>
+            <span class="online-status">
+              <span class="online-dot"></span>
+              Available
+            </span>
+          </div>
 
         </div>
 
 
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            <div>
-                © 2026 Neptunus · Veritas Educational
-            </div>
-
-            <div class="footer-links">
-
-                <a href="#">
-                    Privacy
-                </a>
-
-                <a href="#">
-                    Terms
-                </a>
-
-                <a href="#">
-                    Help
-                </a>
-
-            </div>
-
-        </footer>
+        <p>
+          Your learning companion is ready to help you
+          understand concepts, explore ideas, and continue
+          your learning journey.
+        </p>
 
 
-    </main>
+        <button
+          class="assistant-button"
+          type="button"
+        >
+          Start a conversation
+        </button>
+
+      </aside>
+
+
+    </section>
+
+
+    <!-- =================================================
+         DAILY GOAL
+         ================================================= -->
+
+    <section class="daily-goal">
+
+      <h2>Daily Goal</h2>
+
+      <p>
+        Keep building your knowledge step by step.
+      </p>
+
+      <div class="goal-track">
+        <div class="goal-fill"></div>
+      </div>
+
+      <span class="goal-status">
+        No activity recorded yet
+      </span>
+
+    </section>
+
+
+    <!-- =================================================
+         TODAY'S RECOMMENDATION
+         ================================================= -->
+
+    <section class="recommendation">
+
+      <div>
+
+        <h2>
+          Today's Recommendation
+        </h2>
+
+        <p>
+          Continue your learning journey and explore
+          your next topic.
+        </p>
+
+      </div>
+
+
+      <button
+        class="recommendation-button"
+        type="button"
+      >
+        Continue Learning
+      </button>
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
+
+    <footer class="footer">
+
+      <span>
+        © 2026 Neptunus · Veritas Educational
+      </span>
+
+      <div class="footer-links">
+
+        <a href="#">
+          Privacy
+        </a>
+
+        <a href="#">
+          Terms
+        </a>
+
+        <a href="#">
+          Help
+        </a>
+
+      </div>
+
+    </footer>
+    <!-- =================================================
+         END OF MAIN CONTENT
+         ================================================= -->
+
+  </main>
 
 </div>
 
 
-<!--
-    Current dashboard is a UI prototype. Learning statistics and account information remain neutral until connected to real user data.
+<!-- =====================================================
+     MOBILE SIDEBAR BACKDROP
+     ===================================================== -->
 
-    Planned:
-    - Authentication
-    - Student profiles
-    - Learning progress
-    - Neptunus conversations
-    - Saved knowledge
-    - Search
-    - Personal themes
-    - Database
--->
+<div
+  class="sidebar-backdrop"
+  id="sidebarBackdrop"
+  aria-hidden="true">
+</div>
+
+
+<style>
+
+/* =========================================================
+   DASHBOARD GRID
+   ========================================================= */
+
+.quick-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   QUICK ACTION CARDS
+   ========================================================= */
+
+.action-card {
+  position: relative;
+
+  min-height: 215px;
+
+  padding: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.045),
+      rgba(255,255,255,0.015)
+    );
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-large);
+
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.action-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -55px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background: var(--card-color);
+
+  opacity: 0.08;
+
+  filter: blur(25px);
+
+  pointer-events: none;
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--card-color);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.065),
+      rgba(255,255,255,0.02)
+    );
+}
+
+
+/* Card colors */
+
+.action-card.purple {
+  --card-color: var(--purple);
+}
+
+.action-card.blue {
+  --card-color: var(--blue);
+}
+
+.action-card.green {
+  --card-color: var(--green);
+}
+
+.action-card.orange {
+  --card-color: var(--orange);
+}
+
+.action-card.cyan {
+  --card-color: var(--cyan);
+}
+
+
+.card-icon {
+  font-size: 28px;
+
+  margin-bottom: 18px;
+}
+
+.action-card h2 {
+  font-size: 19px;
+
+  margin-bottom: 8px;
+}
+
+.action-card p {
+  color: var(--text-soft);
+
+  font-size: 13px;
+
+  min-height: 40px;
+}
+
+
+/* ---------- Card buttons ---------- */
+
+.action-button {
+  margin-top: 18px;
+
+  padding: 9px 13px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  color: var(--text);
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.action-button:hover {
+  background: var(--card-color);
+
+  border-color: var(--card-color);
+
+  color: #05070c;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    330px;
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.section-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  font-size: 22px;
+}
+
+.text-button {
+  background: transparent;
+
+  color: var(--purple-soft);
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   LEARNING PATHS
+   ========================================================= */
+
+.learning-paths {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.learning-card {
+  position: relative;
+
+  padding: 20px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-medium);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.learning-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(139,92,246,0.55);
+}
+
+.learning-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  background: rgba(139,92,246,0.10);
+
+  border-radius: 12px;
+
+  font-size: 22px;
+}
+
+.learning-card h3 {
+  font-size: 17px;
+
+  line-height: 1.35;
+
+  margin-bottom: 8px;
+}
+
+.learning-card p {
+  color: var(--text-soft);
+
+  font-size: 13px;
+}
+
+.learning-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 17px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+.status-line {
+  width: 100%;
+
+  height: 5px;
+
+  background: #242d3e;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.small-button {
+  margin-top: 15px;
+
+  padding: 8px 12px;
+
+  background: rgba(139,92,246,0.08);
+
+  border: 1px solid rgba(139,92,246,0.25);
+
+  border-radius: 8px;
+
+  color: var(--purple-soft);
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.small-button:hover {
+  background: rgba(139,92,246,0.18);
+}
+
+
+/* =========================================================
+   NEPTUNUS ASSISTANT
+   ========================================================= */
+
+.assistant-card {
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(139,92,246,0.12),
+      rgba(17,24,39,0.95)
+    );
+
+  border:
+    1px solid rgba(139,92,246,0.28);
+
+  border-radius: var(--radius-large);
+
+  box-shadow: var(--shadow);
+}
+
+.assistant-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 20px;
+}
+
+.assistant-avatar {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(139,92,246,0.15);
+
+  border:
+    1px solid rgba(139,92,246,0.35);
+
+  border-radius: 14px;
+
+  font-size: 23px;
+}
+
+.assistant-header h2 {
+  font-size: 17px;
+}
+
+.online-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 4px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+.online-dot {
+  width: 7px;
+  height: 7px;
+
+  background: var(--green);
+
+  border-radius: 50%;
+}
+
+.assistant-card > p {
+  color: var(--text-soft);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  margin-bottom: 20px;
+}
+
+.assistant-button {
+  width: 100%;
+
+  padding: 11px 14px;
+
+  background: var(--purple);
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.assistant-button:hover {
+  background: var(--purple-soft);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DAILY GOAL
+   ========================================================= */
+
+.daily-goal {
+  margin-top: 24px;
+
+  padding: 22px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-medium);
+}
+
+.daily-goal h2 {
+  font-size: 18px;
+}
+
+.daily-goal p {
+  margin-top: 5px;
+
+  color: var(--text-soft);
+
+  font-size: 13px;
+}
+
+.goal-track {
+  width: 100%;
+
+  height: 6px;
+
+  margin-top: 16px;
+
+  background: #242d3e;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+/*
+  Intentionally empty.
+
+  Real learning activity will control this
+  when the backend exists.
+*/
+
+.goal-fill {
+  width: 0%;
+  height: 100%;
+
+  background: var(--purple);
+
+  border-radius: inherit;
+}
+
+.goal-status {
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RECOMMENDATION
+   ========================================================= */
+
+.recommendation {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 24px;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(96,165,250,0.10),
+      rgba(17,24,39,0.95)
+    );
+
+  border:
+    1px solid rgba(96,165,250,0.22);
+
+  border-radius: var(--radius-large);
+}
+
+.recommendation h2 {
+  font-size: 18px;
+}
+
+.recommendation p {
+  margin-top: 6px;
+
+  color: var(--text-soft);
+
+  font-size: 13px;
+}
+
+.recommendation-button {
+  flex-shrink: 0;
+
+  padding: 11px 16px;
+
+  background: rgba(96,165,250,0.12);
+
+  border: 1px solid rgba(96,165,250,0.30);
+
+  border-radius: 10px;
+
+  color: var(--blue);
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.recommendation-button:hover {
+  background: rgba(96,165,250,0.20);
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: auto;
+  padding: 15px 13px;
+
+  background: rgba(255,255,255,0.035);
+
+  border: 1px solid var(--border-soft);
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.profile-card:hover {
+  background: rgba(255,255,255,0.06);
+
+  border-color: var(--border);
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      #5b7cfa
+    );
+
+  border-radius: 50%;
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.profile-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.profile-info strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.profile-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+.profile-menu {
+  background: transparent;
+
+  color: var(--text-muted);
+
+  cursor: pointer;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 35px;
+  padding-top: 20px;
+
+  border-top: 1px solid var(--border-soft);
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+.footer-links {
+  display: flex;
+
+  gap: 18px;
+}
+
+.footer-links a:hover {
+  color: var(--text-soft);
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE DASHBOARD
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+  .quick-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 1100px) {
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .assistant-card {
+    max-width: none;
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  .quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-paths {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    gap: 18px;
+  }
+
+  .recommendation {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .recommendation-button {
+    width: 100%;
+  }
+
+  .footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   SIDEBAR BACKDROP
+   ========================================================= */
+
+.sidebar-backdrop {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0,0,0,0.55);
+
+  z-index: 90;
+}
+
+@media (max-width: 760px) {
+
+  .sidebar-backdrop.visible {
+    display: block;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE PROFILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .profile-card {
+    margin-top: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   FOCUS STATES
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--purple-soft);
+
+  outline-offset: 3px;
+}
+
+</style>
+
 
 <script>
-    // Prototype only: real profile/authentication will be connected later.
-    const profileButton = document.querySelector(".profile");
 
-    if (profileButton) {
-        profileButton.addEventListener("click", () => {
-            alert("Profile menu — authentication will be connected later.");
-        });
+/* =========================================================
+   NEPTUNUS — BASIC UI CONTROLS
+   ========================================================= */
+
+
+/* ---------- Mobile sidebar ---------- */
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+const sidebar =
+  document.getElementById("sidebar");
+
+const sidebarBackdrop =
+  document.getElementById("sidebarBackdrop");
+
+
+function openSidebar() {
+
+  sidebar.classList.add("open");
+
+  sidebarBackdrop.classList.add("visible");
+
+  mobileMenu.setAttribute(
+    "aria-expanded",
+    "true"
+  );
+}
+
+
+function closeSidebar() {
+
+  sidebar.classList.remove("open");
+
+  sidebarBackdrop.classList.remove("visible");
+
+  mobileMenu.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+}
+
+
+mobileMenu.addEventListener(
+  "click",
+  () => {
+
+    if (
+      sidebar.classList.contains("open")
+    ) {
+
+      closeSidebar();
+
+    } else {
+
+      openSidebar();
+
     }
+
+  }
+);
+
+
+sidebarBackdrop.addEventListener(
+  "click",
+  closeSidebar
+);
+
+
+/* Close mobile navigation after selecting a link */
+
+document
+  .querySelectorAll(".nav-link")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        if (
+          window.innerWidth <= 760
+        ) {
+
+          closeSidebar();
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* ---------- Profile prototype ---------- */
+
+const profileCard =
+  document.querySelector(".profile-card");
+
+const profileMenu =
+  document.querySelector(".profile-menu");
+
+
+profileCard.addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "Profile menu — account functionality will be connected later."
+    );
+
+  }
+);
+
+
+profileMenu.addEventListener(
+  "click",
+  event => {
+
+    event.stopPropagation();
+
+    alert(
+      "Profile menu — account functionality will be connected later."
+    );
+
+  }
+);
+
+
+/* ---------- Responsive cleanup ---------- */
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    if (
+      window.innerWidth > 760
+    ) {
+
+      closeSidebar();
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
