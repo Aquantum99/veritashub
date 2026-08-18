@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VeritasHub</title>
+
 <style>
   /* Reset and background */
   body {
@@ -13,7 +14,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, #050505 0%, #000000 100%);
+
+    background: radial-gradient(
+      circle at center,
+      #050505 0%,
+      #000000 100%
+    );
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
     overflow: hidden;
@@ -25,13 +32,28 @@
     font-weight: 900;
     letter-spacing: 5px;
     color: #00bfff;
-    text-shadow: 0 0 20px #00bfff, 0 0 40px #00bfff;
+
+    text-shadow:
+      0 0 20px #00bfff,
+      0 0 40px #00bfff;
+
     animation: pulse 2.5s infinite ease-in-out;
   }
 
   @keyframes pulse {
-    0%, 100% { text-shadow: 0 0 15px #00bfff, 0 0 30px #00bfff; opacity: 0.8; }
-    50% { text-shadow: 0 0 30px #00bfff, 0 0 60px #00bfff; opacity: 1; }
+    0%, 100% {
+      text-shadow:
+        0 0 15px #00bfff,
+        0 0 30px #00bfff;
+      opacity: 0.8;
+    }
+
+    50% {
+      text-shadow:
+        0 0 30px #00bfff,
+        0 0 60px #00bfff;
+      opacity: 1;
+    }
   }
 
   /* VeritasHub title */
@@ -39,64 +61,160 @@
     font-size: 48px;
     font-weight: 600;
     margin-top: -20px;
+
     color: #00bfff;
-    text-shadow: 0 0 15px #00bfff, 0 0 30px #0077aa;
+
+    text-shadow:
+      0 0 15px #00bfff,
+      0 0 30px #0077aa;
+
     letter-spacing: 3px;
+
     animation: fadein 2s ease forwards;
   }
 
   @keyframes fadein {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Quote text */
   p {
     margin-top: 10px;
     font-size: 18px;
+
     color: #b0e0ff;
+
     text-shadow: 0 0 10px #005577;
+
     animation: fadein 3s ease forwards;
+
     text-align: center;
     max-width: 80%;
+  }
+
+  /* Veritas Educational link */
+  .education-link {
+    margin-top: 28px;
+
+    padding: 12px 24px;
+
+    border: 1px solid #00bfff;
+    border-radius: 8px;
+
+    color: #00bfff;
+    background: rgba(0, 191, 255, 0.04);
+
+    text-decoration: none;
+
+    font-size: 15px;
+    letter-spacing: 1px;
+
+    transition:
+      background 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  /* Link hover effect */
+  .education-link:hover {
+    background: rgba(0, 191, 255, 0.12);
+
+    box-shadow:
+      0 0 20px rgba(0, 191, 255, 0.35);
+
+    transform: translateY(-2px);
   }
 
   /* Subtle pulse glow behind */
   .glow {
     position: absolute;
+
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(0,191,255,0.2) 0%, transparent 80%);
+
+    background: radial-gradient(
+      circle,
+      rgba(0,191,255,0.2) 0%,
+      transparent 80%
+    );
+
     filter: blur(120px);
+
     animation: pulseGlow 5s infinite alternate;
   }
 
   @keyframes pulseGlow {
-    0% { opacity: 0.2; transform: scale(0.95); }
-    100% { opacity: 0.4; transform: scale(1.05); }
+    0% {
+      opacity: 0.2;
+      transform: scale(0.95);
+    }
+
+    100% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
   }
 
   /* Footer */
   footer {
     position: absolute;
     bottom: 10px;
+
     font-size: 14px;
     color: #444;
+
     letter-spacing: 1px;
   }
 
+  /* Mobile */
   @media (max-width: 600px) {
-    .logo { font-size: 80px; }
-    h1 { font-size: 32px; }
-    p { font-size: 16px; }
+    .logo {
+      font-size: 80px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    .education-link {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
   }
 </style>
 </head>
+
 <body>
+
   <div class="glow"></div>
+
   <div class="logo">V</div>
+
   <h1>VeritasHub</h1>
-  <p>Future is forged with vision and partnership.</p>
-  <footer>© 2025 VeritasHub. All Rights Reserved.</footer>
+
+  <p>
+    Future is forged with vision and partnership.
+  </p>
+
+  <a href="educational/" class="education-link">
+    Explore Veritas Educational
+  </a>
+
+  <footer>
+    © 2026 VeritasHub. All Rights Reserved.
+  </footer>
+
 </body>
 </html>
