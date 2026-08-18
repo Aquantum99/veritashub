@@ -1,30 +1,345 @@
-VERITAS EDUCATIONAL
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-Technology • Learning • Innovation
+<title>Veritas Educational</title>
 
-A modern educational environment designed
-to help students understand technology,
-develop practical skills, and progress toward
-advanced fields.
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-                 ↓
+    html {
+        scroll-behavior: smooth;
+    }
 
-              NEPTUNUS
-        Adaptive Learning Platform
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #ffffff;
+        background:
+            radial-gradient(circle at 50% 20%, rgba(0, 140, 255, 0.10), transparent 35%),
+            radial-gradient(circle at 80% 80%, rgba(80, 0, 255, 0.08), transparent 35%),
+            #030507;
+    }
 
-       [ Enter Neptunus → ]
+    /* Navigation */
 
-----------------------------------
+    nav {
+        width: 100%;
+        padding: 22px 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(3, 5, 7, 0.75);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
 
-What you can explore
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
 
-  ICT & Infrastructure
-  Networking
-  Programming
-  Cybersecurity
-  AI
+    .brand-v {
+        color: #00bfff;
+        font-size: 30px;
+        font-weight: 900;
+        text-shadow:
+            0 0 10px #00bfff,
+            0 0 25px rgba(0, 191, 255, 0.6);
+    }
 
-----------------------------------
+    .back-link {
+        color: #a9dfff;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.25s ease;
+    }
 
-Veritas Educational
-© 2026 VeritasHub
+    .back-link:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px #00bfff;
+    }
+
+    /* Hero */
+
+    .hero {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 90px 20px 70px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-glow {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: rgba(0, 191, 255, 0.10);
+        filter: blur(120px);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        max-width: 850px;
+        z-index: 1;
+    }
+
+    .eyebrow {
+        color: #00bfff;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: clamp(42px, 7vw, 78px);
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-shadow:
+            0 0 20px rgba(0, 191, 255, 0.35);
+    }
+
+    .hero-subtitle {
+        margin: 24px auto 0;
+        max-width: 680px;
+        color: #b8c9d6;
+        font-size: clamp(18px, 2.5vw, 22px);
+        line-height: 1.7;
+    }
+
+    /* Neptunus */
+
+    .neptunus-card {
+        margin: 55px auto 0;
+        max-width: 650px;
+        padding: 40px;
+        border: 1px solid rgba(0, 191, 255, 0.30);
+        border-radius: 24px;
+        background: linear-gradient(
+            145deg,
+            rgba(0, 191, 255, 0.08),
+            rgba(30, 10, 70, 0.20)
+        );
+        box-shadow:
+            0 0 40px rgba(0, 191, 255, 0.08),
+            inset 0 0 30px rgba(255, 255, 255, 0.02);
+    }
+
+    .neptunus-card h2 {
+        margin: 0;
+        font-size: 34px;
+        color: #ffffff;
+        letter-spacing: 2px;
+    }
+
+    .neptunus-card p {
+        color: #a9bdca;
+        line-height: 1.7;
+        margin: 14px auto 28px;
+        max-width: 500px;
+    }
+
+    .enter-button {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 10px;
+        background: #00aeea;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.25);
+        transition: 0.25s ease;
+    }
+
+    .enter-button:hover {
+        transform: translateY(-2px);
+        background: #00bfff;
+        box-shadow:
+            0 0 25px rgba(0, 191, 255, 0.45);
+    }
+
+    /* Subjects */
+
+    .subjects {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 80px 25px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 45px;
+    }
+
+    .subject-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+    }
+
+    .subject {
+        padding: 28px 18px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.025);
+        color: #c8d5de;
+        transition: 0.25s ease;
+    }
+
+    .subject:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0, 191, 255, 0.35);
+        color: #ffffff;
+        background: rgba(0, 191, 255, 0.05);
+    }
+
+    /* Footer */
+
+    footer {
+        text-align: center;
+        padding: 35px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: #59656d;
+        font-size: 14px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 800px) {
+        .subject-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        nav {
+            padding: 18px 5%;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .subject-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .neptunus-card {
+            padding: 30px 20px;
+        }
+
+        .hero {
+            padding-top: 65px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="brand">
+        <span class="brand-v">V</span>
+        <span>Veritas Educational</span>
+    </div>
+
+    <a class="back-link" href="../index.html">
+        ← VeritasHub
+    </a>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-glow"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Technology • Learning • Innovation
+        </div>
+
+        <h1>Veritas Educational</h1>
+
+        <p class="hero-subtitle">
+            A technology-focused educational environment designed
+            to help students build practical knowledge and progress
+            toward advanced fields.
+        </p>
+
+        <div class="neptunus-card">
+
+            <h2>NEPTUNUS</h2>
+
+            <p>
+                An adaptive learning platform designed to support
+                students across technology, infrastructure,
+                programming, cybersecurity and artificial intelligence.
+            </p>
+
+            <a class="enter-button" href="#">
+                Enter Neptunus →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="subjects">
+
+    <h2 class="section-title">
+        Areas of Study
+    </h2>
+
+    <div class="subject-grid">
+
+        <div class="subject">
+            ICT & Infrastructure
+        </div>
+
+        <div class="subject">
+            Networking
+        </div>
+
+        <div class="subject">
+            Programming
+        </div>
+
+        <div class="subject">
+            Cybersecurity
+        </div>
+
+        <div class="subject">
+            Artificial Intelligence
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 VeritasHub · Veritas Educational
+</footer>
+
+</body>
+</html>
