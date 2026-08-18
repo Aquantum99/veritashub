@@ -38,6 +38,9 @@
       0 0 40px #00bfff;
 
     animation: pulse 2.5s infinite ease-in-out;
+
+    position: relative;
+    z-index: 2;
   }
 
   @keyframes pulse {
@@ -71,6 +74,9 @@
     letter-spacing: 3px;
 
     animation: fadein 2s ease forwards;
+
+    position: relative;
+    z-index: 2;
   }
 
   @keyframes fadein {
@@ -98,12 +104,17 @@
 
     text-align: center;
     max-width: 80%;
+
+    position: relative;
+    z-index: 2;
   }
 
   /* Veritas Educational link */
   .education-link {
-    margin-top: 28px;
+    position: relative;
+    z-index: 2;
 
+    margin-top: 28px;
     padding: 12px 24px;
 
     border: 1px solid #00bfff;
@@ -142,13 +153,18 @@
 
     background: radial-gradient(
       circle,
-      rgba(0,191,255,0.2) 0%,
+      rgba(0, 191, 255, 0.2) 0%,
       transparent 80%
     );
 
     filter: blur(120px);
 
     animation: pulseGlow 5s infinite alternate;
+
+    /* Prevent glow from blocking clicks */
+    pointer-events: none;
+
+    z-index: 0;
   }
 
   @keyframes pulseGlow {
@@ -172,6 +188,8 @@
     color: #444;
 
     letter-spacing: 1px;
+
+    z-index: 2;
   }
 
   /* Mobile */
@@ -208,7 +226,7 @@
     Future is forged with vision and partnership.
   </p>
 
-  <a href="./educational/" class="education-link">
+  <a href="/educational/" class="education-link">
     Explore Veritas Educational
   </a>
 
