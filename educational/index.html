@@ -105,6 +105,8 @@ input {
     bottom: 0;
 
     z-index: 20;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Brand */
@@ -210,6 +212,8 @@ input {
 
 .sidebar-bottom {
     margin-top: auto;
+    padding-top: 18px;
+    flex-shrink: 0;
 }
 
 .profile {
@@ -232,6 +236,11 @@ input {
 
 .profile:hover {
     background: rgba(255,255,255,0.05);
+}
+
+.profile:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
 }
 
 .avatar {
@@ -868,27 +877,6 @@ input {
     font-size: 13px;
 }
 
-.goal-progress {
-    height: 7px;
-
-    margin-top: 18px;
-
-    border-radius: 10px;
-
-    background: #252d3d;
-
-    overflow: hidden;
-}
-
-.goal-progress div {
-    height: 100%;
-
-    width: 40%;
-
-    background: var(--accent);
-
-    border-radius: 10px;
-}
 
 .goal-count {
     margin-top: 9px;
@@ -1189,7 +1177,7 @@ input {
 
         <div class="sidebar-bottom">
 
-            <div class="profile" role="button" tabindex="0" aria-label="Open profile menu">
+            <button class="profile" type="button" aria-label="Open Jace profile menu">
 
                 <div class="avatar">
                     J
@@ -1211,7 +1199,7 @@ input {
                     ˅
                 </div>
 
-            </div>
+            </button>
 
         </div>
 
@@ -1662,10 +1650,6 @@ input {
                         Keep building your knowledge step by step.
                     </p>
 
-                    <div class="goal-progress">
-                        <div></div>
-                    </div>
-
                     <div class="goal-count">
                         No activity recorded yet
                     </div>
@@ -1723,6 +1707,17 @@ input {
     - Personal themes
     - Database
 -->
+
+<script>
+    // Prototype only: real profile/authentication will be connected later.
+    const profileButton = document.querySelector(".profile");
+
+    if (profileButton) {
+        profileButton.addEventListener("click", () => {
+            alert("Profile menu — authentication will be connected later.");
+        });
+    }
+</script>
 
 </body>
 </html>
