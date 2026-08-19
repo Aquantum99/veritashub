@@ -1406,6 +1406,104 @@ body.sidebar-collapsed .sidebar-reopen {
 
 }
 
+
+/* -------------------------------------------------------------
+   NEPO CONVERSATION HOME — clean public starting point
+   ------------------------------------------------------------- */
+.nepo-hero {
+    display: block;
+    margin-bottom: 34px;
+}
+
+.nepo-console {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.nepo-conversation {
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
+    margin-top: 22px;
+    padding: 24px;
+    background:
+        radial-gradient(circle at 85% 0%, rgba(124,77,255,0.10), transparent 42%),
+        #0c111c;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.nepo-greeting {
+    display: inline-flex;
+    align-self: flex-start;
+    max-width: 82%;
+    padding: 12px 16px;
+    background: #1c2740;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 15px 15px 15px 5px;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.nepo-composer {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding-top: 28px;
+}
+
+.nepo-composer textarea {
+    width: 100%;
+    min-height: 94px;
+    resize: vertical;
+    padding: 4px 2px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.nepo-composer textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.nepo-composer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.nepo-console .console-note {
+    margin-top: 12px;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .nepo-console {
+        padding: 16px;
+    }
+
+    .nepo-conversation {
+        padding: 18px;
+    }
+
+    .nepo-greeting {
+        max-width: 100%;
+    }
+
+    .nepo-composer-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
 </style>
 </head>
 
@@ -1507,7 +1605,7 @@ body.sidebar-collapsed .sidebar-reopen {
 
         <div class="sidebar-bottom">
 
-            <div class="guest-profile" aria-label="Public account area">
+            <div class="guest-profile" aria-label="Account area">
 
                 <div class="avatar guest-avatar">
                     G
@@ -1516,7 +1614,7 @@ body.sidebar-collapsed .sidebar-reopen {
                 <div class="profile-info">
 
                     <div class="profile-name">
-                        Guest
+                        Student
                     </div>
 
                     <div class="profile-role">
@@ -1548,7 +1646,7 @@ body.sidebar-collapsed .sidebar-reopen {
         <header class="topbar">
             <div class="welcome">
                 <h1>Welcome to Neptunus 👋</h1>
-                <p>Choose what you want to understand, practice, or learn.</p>
+                <p>What would you like to learn today?</p>
             </div>
 
             <div class="search">
@@ -1563,12 +1661,6 @@ body.sidebar-collapsed .sidebar-reopen {
 
         <!-- PRIMARY NEPO EXPERIENCE -->
         <section class="nepo-hero" id="nepoHero">
-            <div class="nepo-hero-copy">
-                <div class="eyebrow">NEPO · YOUR LEARNING AGENT</div>
-                <h2>What would you like to learn today?</h2>
-                <p>Tell Nepo what you want to understand, practice, or learn. Your starting point can be any field.</p>
-            </div>
-
             <div class="nepo-console" id="nepoConsole">
                 <div class="console-top">
                     <div class="nepo-avatar large">🤖</div>
@@ -1578,22 +1670,23 @@ body.sidebar-collapsed .sidebar-reopen {
                     </div>
                 </div>
 
-                <div class="chat-preview" id="chatPreview">
-                    <div class="chat-bubble nepobubble">Hi. What would you like to understand?</div>
-                    <div class="chat-hint">Example: “I'm a mechanic and I want to understand electric vehicle systems.”</div>
-                </div>
+                <div class="nepo-conversation" id="nepoConversation">
+                    <div class="nepo-greeting" id="nepoGreeting">Hi. What would you like to learn, understand, or practice?</div>
 
-                <textarea id="learningInput" placeholder="Tell Nepo what you want to learn..." aria-label="What would you like to learn?"></textarea>
+                    <div class="nepo-composer">
+                        <textarea id="learningInput" placeholder="Ask Nepo anything..." aria-label="Ask Nepo anything"></textarea>
 
-                <div class="console-actions">
-                    <div class="mode-buttons" role="group" aria-label="Learning mode">
-                        <button class="mode-button active" data-mode="Learn">📚 Learn</button>
-                        <button class="mode-button" data-mode="Practice">🛠 Practice</button>
-                        <button class="mode-button" data-mode="Explain">💡 Explain</button>
+                        <div class="nepo-composer-footer">
+                            <div class="mode-buttons" role="group" aria-label="Learning mode">
+                                <button class="mode-button active" data-mode="Learn" type="button">📚 Learn</button>
+                                <button class="mode-button" data-mode="Practice" type="button">🛠 Practice</button>
+                                <button class="mode-button" data-mode="Explain" type="button">💡 Explain</button>
+                            </div>
+                            <button class="start-button" id="startLearning" type="button">Start learning →</button>
+                        </div>
                     </div>
-                    <button class="start-button" id="startLearning">Start learning →</button>
                 </div>
-                <div class="console-note">Nepo will help you learn, practice, and understand — across any field.</div>
+                <div class="console-note">Nepo helps you learn, practice, and understand — across any field.</div>
             </div>
         </section>
 
@@ -1721,8 +1814,8 @@ body.sidebar-collapsed .sidebar-reopen {
 
 <script>
     const settingsPanel = document.getElementById("settingsPanel");
+    const nepoGreeting = document.getElementById("nepoGreeting");
     const learningInput = document.getElementById("learningInput");
-    const chatPreview = document.getElementById("chatPreview");
     const sidebarToggle = document.getElementById("sidebarToggle");
     const sidebarReopen = document.getElementById("sidebarReopen");
 
@@ -1788,12 +1881,9 @@ body.sidebar-collapsed .sidebar-reopen {
             return;
         }
 
-        chatPreview.innerHTML =
-            '<div class="chat-bubble nepobubble">Got it. Let’s work through that together.</div>' +
-            '<div class="chat-hint">This conversation area is ready for the Nepo backend to continue the lesson, generate content, retrieve information, or guide the next step.</div>';
-
+        nepoGreeting.textContent = "Got it. Let’s work through that together.";
         learningInput.value = "";
-        chatPreview.scrollTop = chatPreview.scrollHeight;
+        learningInput.focus();
     });
 
     // Public mode: authentication belongs to the account area, not the AI workspace.
