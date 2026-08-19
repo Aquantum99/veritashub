@@ -151,6 +151,44 @@ input {
     max-width: 190px;
 }
 
+/* Sidebar visibility */
+.sidebar-reopen {
+    position: fixed;
+    left: 12px;
+    top: 18px;
+    width: 38px;
+    height: 38px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: var(--shadow);
+}
+
+body.sidebar-collapsed .sidebar {
+    transform: translateX(-100%);
+}
+
+body.sidebar-collapsed .main {
+    width: 100%;
+    margin-left: 0;
+}
+
+body.sidebar-collapsed .sidebar-reopen {
+    display: flex;
+}
+
+.sidebar,
+.main {
+    transition: margin-left 0.22s ease, width 0.22s ease, transform 0.22s ease;
+}
+
 /* Navigation */
 
 .nav-section {
@@ -306,10 +344,8 @@ input {
 .topbar {
     display: flex;
     align-items: center;
-
     gap: 20px;
-
-    margin-bottom: 30px;
+    margin-bottom: 34px;
 }
 
 .welcome {
@@ -988,14 +1024,17 @@ input {
 ----------------------------- */
 .nepo-hero {
     display: grid;
-    grid-template-columns: minmax(260px, 0.72fr) minmax(460px, 1.28fr);
-    gap: 34px;
-    align-items: center;
-    margin-bottom: 34px;
+    grid-template-columns: minmax(280px, 0.62fr) minmax(620px, 1.38fr);
+    gap: 38px;
+    align-items: stretch;
+    margin-bottom: 38px;
 }
 
 .nepo-hero-copy {
-    padding: 8px 0;
+    padding: 26px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .eyebrow {
@@ -1007,61 +1046,144 @@ input {
 }
 
 .nepo-hero-copy h2 {
-    font-size: clamp(38px, 4vw, 58px);
-    line-height: 1.02;
-    letter-spacing: -1.8px;
-    max-width: 520px;
+    font-size: clamp(40px, 4.1vw, 62px);
+    line-height: 1.01;
+    letter-spacing: -2.1px;
+    max-width: 560px;
 }
 
 .nepo-hero-copy p {
-    margin-top: 22px;
-    max-width: 510px;
+    margin-top: 24px;
+    max-width: 540px;
     color: var(--text-secondary);
     font-size: 16px;
     line-height: 1.75;
 }
 
 .nepo-console {
-    min-height: 390px;
-    padding: 25px;
-    border: 1px solid rgba(124,77,255,0.48);
-    border-radius: 22px;
+    min-height: 560px;
+    padding: 28px;
+    border: 1px solid rgba(124,77,255,0.30);
+    border-radius: 24px;
     background:
-        radial-gradient(circle at 90% 5%, rgba(124,77,255,0.18), transparent 42%),
-        linear-gradient(145deg, rgba(23,24,52,0.98), rgba(15,19,31,0.98));
-    box-shadow: var(--shadow);
+        radial-gradient(circle at 92% 0%, rgba(124,77,255,0.12), transparent 34%),
+        linear-gradient(145deg, rgba(17,22,35,0.98), rgba(10,14,24,0.98));
+    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    display: flex;
+    flex-direction: column;
 }
 
-.console-top { display:flex; align-items:center; gap:12px; }
-.nepo-avatar.large { width:52px; height:52px; border-radius:16px; font-size:28px; }
-.chat-preview { min-height:92px; margin:22px 0 14px; padding:16px; border-radius:14px; background:rgba(8,11,20,0.45); border:1px solid rgba(255,255,255,0.05); }
-.chat-bubble { display:inline-block; max-width:85%; padding:11px 14px; border-radius:14px 14px 14px 4px; background:#202943; color:var(--text); font-size:14px; line-height:1.5; }
-.chat-hint { margin-top:10px; color:var(--text-muted); font-size:12px; line-height:1.5; }
+.console-top {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding-bottom:18px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.nepo-avatar.large {
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    font-size:27px;
+}
+
+.chat-preview {
+    flex: 1;
+    min-height: 210px;
+    margin: 18px 0;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(4,7,14,0.58);
+    border: 1px solid rgba(255,255,255,0.055);
+    overflow: auto;
+}
+
+.chat-bubble {
+    display:inline-block;
+    max-width:86%;
+    padding:13px 16px;
+    border-radius:16px 16px 16px 5px;
+    background:#202943;
+    color:var(--text);
+    font-size:15px;
+    line-height:1.55;
+}
+
+.chat-hint {
+    margin-top:12px;
+    color:var(--text-muted);
+    font-size:13px;
+    line-height:1.55;
+}
 
 #learningInput {
     width:100%;
-    min-height:84px;
+    min-height:112px;
     resize:vertical;
-    padding:14px;
-    border-radius:12px;
+    padding:17px 18px;
+    border-radius:16px;
     border:1px solid var(--border);
     outline:none;
-    background:rgba(10,14,24,0.72);
+    background:rgba(5,9,17,0.86);
     color:var(--text);
+    font-size:15px;
+    line-height:1.55;
 }
-#learningInput:focus { border-color:rgba(124,77,255,0.65); box-shadow:0 0 0 3px rgba(124,77,255,0.10); }
-#learningInput::placeholder { color:var(--text-muted); }
-.console-actions { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:13px; }
-.mode-buttons { display:flex; gap:8px; flex-wrap:wrap; }
-.mode-button { padding:9px 12px; border-radius:9px; border:1px solid var(--border); background:rgba(255,255,255,0.025); color:var(--text-secondary); cursor:pointer; }
-.mode-button.active, .mode-button:hover { color:var(--text); border-color:rgba(124,77,255,0.55); background:var(--accent-soft); }
-.start-button { padding:12px 18px; border:0; border-radius:10px; background:linear-gradient(135deg,#7c4dff,#6340d4); color:white; font-weight:650; cursor:pointer; white-space:nowrap; }
-.start-button:hover { transform:translateY(-1px); box-shadow:0 8px 25px rgba(124,77,255,0.25); }
-.console-note { margin-top:11px; color:var(--text-muted); font-size:12px; }
 
-.auth-button { padding:10px 13px; border-radius:9px; cursor:pointer; font-size:13px; font-weight:600; white-space:nowrap; }
-.auth-button.secondary { background:transparent; border:1px solid var(--border); color:var(--text-secondary); }
-.auth-button.primary { background:var(--accent); border:1px solid var(--accent); color:#fff; }
+#learningInput:focus {
+    border-color:rgba(124,77,255,0.65);
+    box-shadow:0 0 0 3px rgba(124,77,255,0.10);
+}
+
+#learningInput::placeholder { color:var(--text-muted); }
+
+.console-actions {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-top:14px;
+}
+
+.mode-buttons { display:flex; gap:8px; flex-wrap:wrap; }
+
+.mode-button {
+    padding:10px 13px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.025);
+    color:var(--text-secondary);
+    cursor:pointer;
+}
+
+.mode-button.active, .mode-button:hover {
+    color:var(--text);
+    border-color:rgba(124,77,255,0.55);
+    background:var(--accent-soft);
+}
+
+.start-button {
+    padding:13px 20px;
+    border:0;
+    border-radius:11px;
+    background:linear-gradient(135deg,#7c4dff,#6340d4);
+    color:white;
+    font-weight:650;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.start-button:hover {
+    transform:translateY(-1px);
+    box-shadow:0 8px 25px rgba(124,77,255,0.25);
+}
+
+.console-note {
+    margin-top:11px;
+    color:var(--text-muted);
+    font-size:12px;
+}
 
 .learning-space, .approach-card { margin-bottom:24px; }
 .learning-space { padding:24px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); }
@@ -1082,7 +1204,70 @@ input {
 .approach-card h2 { font-size:19px; }
 .approach-card p { margin-top:8px; color:var(--text-secondary); font-size:13px; line-height:1.6; max-width:850px; }
 
-.guest-profile { padding:11px; border:1px solid var(--border-soft); background:rgba(255,255,255,0.025); border-radius:13px; display:flex; align-items:center; gap:10px; }
+.sidebar-toggle {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.sidebar-toggle:hover {
+    color: var(--text);
+    background: var(--surface-hover);
+}
+
+.guest-profile {
+    padding:12px;
+    border:1px solid var(--border-soft);
+    background:rgba(255,255,255,0.025);
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.guest-avatar {
+    background:linear-gradient(135deg,#5f6b80,#394457);
+}
+
+.profile-auth {
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:3px;
+}
+
+.profile-auth-button {
+    padding:8px 6px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text-secondary);
+    cursor:pointer;
+    font-size:11px;
+    font-weight:600;
+}
+
+.profile-auth-button:hover {
+    color:var(--text);
+    background:var(--surface-hover);
+}
+
+.profile-auth-button.primary {
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+}
 
 /* Settings panel */
 .settings-panel { position:fixed; inset:0; background:rgba(0,0,0,0.58); display:none; align-items:center; justify-content:center; z-index:100; padding:20px; }
@@ -1117,33 +1302,49 @@ input {
 
 }
 
+@media (max-width: 1150px) {
+    .nepo-hero {
+        grid-template-columns: minmax(240px, 0.55fr) minmax(500px, 1.45fr);
+        gap: 26px;
+    }
+
+    .nepo-console {
+        min-height: 520px;
+    }
+}
+
 @media (max-width: 950px) {
 
     .sidebar {
-        width: 78px;
+        width: 255px;
         padding: 18px 10px;
     }
 
-    .brand-subtitle,
-    .brand-name,
-    .nav-item span:not(.nav-icon),
-    .profile-info,
-    .profile-arrow {
-        display: none;
+    .sidebar {
+        box-shadow: 12px 0 40px rgba(0,0,0,0.30);
     }
 
-    .brand {
-        padding-left: 10px;
+    body:not(.sidebar-collapsed) .sidebar {
+        transform: translateX(0);
     }
 
-    .nav-item {
-        justify-content: center;
+    body:not(.sidebar-collapsed) .main {
+        width: 100%;
+        margin-left: 0;
     }
 
     .main {
-        width: calc(100% - 78px);
-        margin-left: 78px;
+        width: 100%;
+        margin-left: 0;
         padding: 24px;
+    }
+
+    .nepo-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .nepo-hero-copy {
+        padding-bottom: 0;
     }
 
     .content-grid {
@@ -1162,8 +1363,7 @@ input {
         flex-wrap: wrap;
     }
 
-    .top-actions { width:100%; }
-    .auth-button { flex:1; }
+    .top-actions { width:auto; }
     .nepo-console { min-height:0; }
     .console-actions { align-items:stretch; flex-direction:column; }
     .start-button { width:100%; }
@@ -1211,6 +1411,9 @@ input {
 
 <body>
 
+<button class="sidebar-reopen" id="sidebarReopen" type="button"
+        aria-label="Open sidebar" title="Open sidebar">›</button>
+
 <div class="app">
 
     <!-- =========================
@@ -1220,6 +1423,9 @@ input {
     <aside class="sidebar">
 
         <div class="brand">
+
+            <button class="sidebar-toggle" id="sidebarToggle" type="button"
+                    aria-label="Close sidebar" title="Close sidebar">‹</button>
 
             <div class="brand-row">
 
@@ -1301,29 +1507,30 @@ input {
 
         <div class="sidebar-bottom">
 
-            <button class="profile" type="button" aria-label="Open Jace profile menu">
+            <div class="guest-profile" aria-label="Public account area">
 
-                <div class="avatar">
-                    J
+                <div class="avatar guest-avatar">
+                    G
                 </div>
 
                 <div class="profile-info">
 
                     <div class="profile-name">
-                        Jace
+                        Guest
                     </div>
 
                     <div class="profile-role">
-                        Student
+                        Public access
                     </div>
 
                 </div>
 
-                <div class="profile-arrow">
-                    ˅
+                <div class="profile-auth">
+                    <button class="profile-auth-button" type="button" data-action="signin">Sign in</button>
+                    <button class="profile-auth-button primary" type="button" data-action="signup">Create account</button>
                 </div>
 
-            </button>
+            </div>
 
         </div>
 
@@ -1350,8 +1557,6 @@ input {
             </div>
 
             <div class="top-actions">
-                <button class="auth-button secondary" type="button" data-action="signin">Sign in</button>
-                <button class="auth-button primary" type="button" data-action="signup">Create account</button>
                 <button class="icon-button" type="button" title="Settings" data-action="settings">⚙</button>
             </div>
         </header>
@@ -1359,7 +1564,7 @@ input {
         <!-- PRIMARY NEPO EXPERIENCE -->
         <section class="nepo-hero" id="nepoHero">
             <div class="nepo-hero-copy">
-                <div class="eyebrow">YOUR LEARNING COMPANION</div>
+                <div class="eyebrow">NEPO · YOUR LEARNING AGENT</div>
                 <h2>What would you like to learn today?</h2>
                 <p>Tell Nepo what you want to understand, practice, or learn. Your starting point can be any field.</p>
             </div>
@@ -1388,7 +1593,7 @@ input {
                     </div>
                     <button class="start-button" id="startLearning">Start learning →</button>
                 </div>
-                <div class="console-note">Nepo will help turn your request into a guided learning experience.</div>
+                <div class="console-note">Nepo will help you learn, practice, and understand — across any field.</div>
             </div>
         </section>
 
@@ -1518,6 +1723,23 @@ input {
     const settingsPanel = document.getElementById("settingsPanel");
     const learningInput = document.getElementById("learningInput");
     const chatPreview = document.getElementById("chatPreview");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarReopen = document.getElementById("sidebarReopen");
+
+    // Sidebar is user-controlled and remembered locally.
+    const savedSidebarState = localStorage.getItem("neptunus.sidebarCollapsed");
+    if (savedSidebarState === "true") {
+        document.body.classList.add("sidebar-collapsed");
+    }
+
+    function setSidebarCollapsed(collapsed) {
+        document.body.classList.toggle("sidebar-collapsed", collapsed);
+        localStorage.setItem("neptunus.sidebarCollapsed", String(collapsed));
+        sidebarToggle.setAttribute("aria-label", collapsed ? "Sidebar closed" : "Close sidebar");
+    }
+
+    sidebarToggle.addEventListener("click", () => setSidebarCollapsed(true));
+    sidebarReopen.addEventListener("click", () => setSidebarCollapsed(false));
 
     document.querySelectorAll('[data-action="settings"]').forEach(btn => {
         btn.addEventListener("click", () => {
@@ -1553,7 +1775,10 @@ input {
     });
 
     document.querySelectorAll('[data-focus="nepo"]').forEach(button => {
-        button.addEventListener("click", () => learningInput.focus());
+        button.addEventListener("click", () => {
+            learningInput.focus();
+            learningInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
     });
 
     document.getElementById("startLearning").addEventListener("click", () => {
@@ -1562,10 +1787,16 @@ input {
             learningInput.focus();
             return;
         }
-        chatPreview.innerHTML = '<div class="chat-bubble nepobubble">Got it. Let’s work through that together.</div><div class="chat-hint">Your request has been captured for the future Nepo conversation backend.</div>';
+
+        chatPreview.innerHTML =
+            '<div class="chat-bubble nepobubble">Got it. Let’s work through that together.</div>' +
+            '<div class="chat-hint">This conversation area is ready for the Nepo backend to continue the lesson, generate content, retrieve information, or guide the next step.</div>';
+
         learningInput.value = "";
+        chatPreview.scrollTop = chatPreview.scrollHeight;
     });
 
+    // Public mode: authentication belongs to the account area, not the AI workspace.
     document.querySelectorAll('[data-action="signin"], [data-action="signup"]').forEach(btn => {
         btn.addEventListener("click", () => {
             alert("Authentication will be connected in the backend phase.");
