@@ -605,7 +605,7 @@ a {
       </div>
 
       <div class="brand-subtitle">
-        Your Adaptive Learning<br>
+        Your AI Learning<br>
         Companion
       </div>
     </div>
@@ -638,9 +638,9 @@ a {
         <span>Progress</span>
       </a>
 
-      <a href="#" class="nav-link">
-        <span class="nav-icon">◌</span>
-        <span>Learn with Neptunus</span>
+      <a href="#" class="nav-link nepo-nav-link" id="nepoNavLink">
+        <span class="nav-icon">🤖</span>
+        <span>Nepo</span>
       </a>
 
 
@@ -683,7 +683,7 @@ a {
 
       <div class="profile-info">
         <strong>Jace</strong>
-        <span>Learner</span>
+        <span>Student</span>
       </div>
 
       <button
@@ -765,7 +765,7 @@ a {
         <button
           class="icon-button"
           type="button"
-          aria-label="Neptunus Assistant"
+          aria-label="Open Nepo"
         >
           🤖
         </button>
@@ -780,9 +780,9 @@ a {
 
     <section class="learning-hero">
       <div class="hero-copy">
-        <span class="hero-eyebrow">YOUR LEARNING COMPANION</span>
+        <span class="hero-eyebrow">NEPO · YOUR LEARNING COMPANION</span>
         <h1>What would you like to learn today?</h1>
-        <p>Tell Neptunus what you want to understand, practice, or learn. Your learning journey can start from any field.</p>
+        <p>Tell Nepo what you want to understand, practice, or learn. Your learning journey can start from any field.</p>
       </div>
 
       <div class="learning-input-card">
@@ -798,7 +798,7 @@ a {
           </div>
           <button class="start-learning-button" id="startLearning" type="button">Start learning →</button>
         </div>
-        <div class="learning-feedback" id="learningFeedback" aria-live="polite">Neptunus will help you turn your request into a learning path.</div>
+        <div class="learning-feedback" id="learningFeedback" aria-live="polite">Nepo will help you turn your request into a learning path.</div>
       </div>
     </section>
 
@@ -819,7 +819,7 @@ a {
 
     <section class="mode-section">
       <div class="section-heading">
-        <div><span class="section-eyebrow">HOW NEPTUNUS CAN HELP</span><h2>Choose your way to learn</h2></div>
+        <div><span class="section-eyebrow">HOW NEPTUNUS CAN HELP</span><h2>Choose how Nepo helps</h2></div>
       </div>
       <div class="mode-grid">
         <article class="mode-card"><div class="mode-card-icon purple-icon">📚</div><h3>Learn a topic</h3><p>Build understanding step by step with explanations, examples, questions, and lessons.</p></article>
@@ -844,8 +844,8 @@ a {
       <div class="principle-avatar">🤖</div>
       <div class="principle-copy">
         <span class="section-eyebrow">THE NEPTUNUS APPROACH</span>
-        <h2>You choose what to learn. Neptunus helps you learn it.</h2>
-        <p>You don't need to know which course, subject, or specialist you need. Describe what you are trying to understand, and Neptunus can guide the learning process.</p>
+        <h2>You choose what to learn. Nepo helps you learn it.</h2>
+        <p>You don't need to know which course, subject, or specialist you need. Describe what you are trying to understand, and Nepo can guide the learning process.</p>
       </div>
       <button class="principle-button" type="button" id="principleStart">Start a conversation</button>
     </section>
@@ -1720,7 +1720,8 @@ input:focus-visible {
 
 <script>
 const mobileMenu=document.getElementById("mobileMenu");const sidebar=document.getElementById("sidebar");const sidebarBackdrop=document.getElementById("sidebarBackdrop");function openSidebar(){sidebar.classList.add("open");sidebarBackdrop.classList.add("visible");mobileMenu.setAttribute("aria-expanded","true")}function closeSidebar(){sidebar.classList.remove("open");sidebarBackdrop.classList.remove("visible");mobileMenu.setAttribute("aria-expanded","false")}mobileMenu.addEventListener("click",()=>sidebar.classList.contains("open")?closeSidebar():openSidebar());sidebarBackdrop.addEventListener("click",closeSidebar);document.querySelectorAll(".nav-link").forEach(link=>link.addEventListener("click",()=>{if(window.innerWidth<=760)closeSidebar()}));
-const request=document.getElementById("learningRequest"),feedback=document.getElementById("learningFeedback"),start=document.getElementById("startLearning"),newLearning=document.getElementById("newLearningButton"),principle=document.getElementById("principleStart");let mode="learn";document.querySelectorAll(".mode-chip").forEach(chip=>chip.addEventListener("click",()=>{document.querySelectorAll(".mode-chip").forEach(x=>x.classList.remove("active"));chip.classList.add("active");mode=chip.dataset.mode;}));function begin(){const text=request.value.trim();if(!text){feedback.textContent="Tell Neptunus what you would like to learn first.";request.focus();return}const names={learn:"learning",practice:"practice",explain:"explanation"};feedback.textContent=`Neptunus is preparing a ${names[mode]} path for you. Backend connection will handle the next step.`}start.addEventListener("click",begin);newLearning.addEventListener("click",()=>{request.focus();request.scrollIntoView({behavior:"smooth",block:"center"})});principle.addEventListener("click",()=>{request.focus();request.scrollIntoView({behavior:"smooth",block:"center"})});request.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))begin()});window.addEventListener("resize",()=>{if(window.innerWidth>760)closeSidebar()});
+const nepoNav=document.getElementById("nepoNavLink");if(nepoNav){nepoNav.addEventListener("click",e=>{e.preventDefault();request.focus();request.scrollIntoView({behavior:"smooth",block:"center"})});}
+const request=document.getElementById("learningRequest"),feedback=document.getElementById("learningFeedback"),start=document.getElementById("startLearning"),newLearning=document.getElementById("newLearningButton"),principle=document.getElementById("principleStart");let mode="learn";document.querySelectorAll(".mode-chip").forEach(chip=>chip.addEventListener("click",()=>{document.querySelectorAll(".mode-chip").forEach(x=>x.classList.remove("active"));chip.classList.add("active");mode=chip.dataset.mode;}));function begin(){const text=request.value.trim();if(!text){feedback.textContent="Tell Neptunus what you would like to learn first.";request.focus();return}const names={learn:"learning",practice:"practice",explain:"explanation"};feedback.textContent=`Nepo is preparing a ${names[mode]} path for you. Backend connection will handle the next step.`}start.addEventListener("click",begin);newLearning.addEventListener("click",()=>{request.focus();request.scrollIntoView({behavior:"smooth",block:"center"})});principle.addEventListener("click",()=>{request.focus();request.scrollIntoView({behavior:"smooth",block:"center"})});request.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))begin()});window.addEventListener("resize",()=>{if(window.innerWidth>760)closeSidebar()});
 </script>
 
 </body>
