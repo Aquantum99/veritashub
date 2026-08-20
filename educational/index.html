@@ -2,1897 +2,241 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Neptunus — Veritas Educational</title>
-
 <style>
-
-:root {
-    --background: #090d16;
-    --surface: #101725;
-    --surface-2: #141c2c;
-    --surface-hover: #1a2437;
-
-    --border: #273249;
-    --border-soft: rgba(255,255,255,0.07);
-
-    --text: #f3f6ff;
-    --text-secondary: #a9b4c8;
-    --text-muted: #707c91;
-
-    --accent: #7c4dff;
-    --accent-light: #a78bfa;
-    --accent-soft: rgba(124,77,255,0.14);
-
-    --blue: #4f8cff;
-    --green: #42c88a;
-    --orange: #ff9d42;
-    --cyan: #42c7d6;
-
-    --shadow: 0 20px 50px rgba(0,0,0,0.25);
-
-    --radius: 16px;
-}
-
-/* -----------------------------
-   RESET
------------------------------ */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 75% 0%,
-            rgba(124,77,255,0.08),
-            transparent 35%
-        ),
-        var(--background);
-
-    color: var(--text);
-
-    font-family:
-        "Segoe UI",
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif;
-
-    overflow-x: hidden;
-}
-
-button,
-input {
-    font: inherit;
-}
-
-/* -----------------------------
-   APP LAYOUT
------------------------------ */
-
-.app {
-    min-height: 100vh;
-    display: flex;
-}
-
-/* -----------------------------
-   SIDEBAR
------------------------------ */
-
-.sidebar {
-    width: 255px;
-    min-height: 100vh;
-
-    background: rgba(13,18,29,0.96);
-
-    border-right: 1px solid var(--border-soft);
-
-    padding: 22px 16px;
-
-    display: flex;
-    flex-direction: column;
-
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    z-index: 20;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-/* Brand */
-
-.brand {
-    padding: 4px 10px 22px;
-}
-
-.brand-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-icon {
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #ffb63e;
-
-    font-size: 25px;
-}
-
-.brand-name {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-}
-
-.brand-subtitle {
-    margin-top: 8px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-    line-height: 1.5;
-
-    max-width: 190px;
-}
-
-/* Sidebar visibility */
-.sidebar-reopen {
-    position: fixed;
-    left: 12px;
-    top: 18px;
-    width: 38px;
-    height: 38px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 30;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: var(--surface);
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 22px;
-    box-shadow: var(--shadow);
-}
-
-body.sidebar-collapsed .sidebar {
-    transform: translateX(-100%);
-}
-
-body.sidebar-collapsed .main {
-    width: 100%;
-    margin-left: 0;
-}
-
-body.sidebar-collapsed .sidebar-reopen {
-    display: flex;
-}
-
-.sidebar,
-.main {
-    transition: margin-left 0.22s ease, width 0.22s ease, transform 0.22s ease;
-}
-
-/* Navigation */
-
-.nav-section {
-    margin-top: 5px;
-}
-
-.nav-item {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    padding: 11px 12px;
-
-    margin-bottom: 4px;
-
-    border-radius: 10px;
-
-    color: var(--text-secondary);
-
-    text-decoration: none;
-
-    font-size: 15px;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.nav-item:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-    transform: translateX(2px);
-}
-
-.nav-item.active {
-    background: var(--accent-soft);
-    color: #a98cff;
-
-    box-shadow:
-        inset 0 0 0 1px rgba(124,77,255,0.16);
-}
-
-.nav-icon {
-    width: 22px;
-    text-align: center;
-    font-size: 17px;
-}
-
-.nav-divider {
-    height: 1px;
-    background: var(--border-soft);
-    margin: 17px 10px;
-}
-
-/* Bottom profile */
-
-.sidebar-bottom {
-    margin-top: auto;
-    padding-top: 18px;
-    flex-shrink: 0;
-}
-
-.profile {
-    padding: 11px;
-
-    border: 1px solid var(--border-soft);
-
-    background: rgba(255,255,255,0.025);
-
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    cursor: pointer;
-
-    transition: background 0.2s ease;
-}
-
-.profile:hover {
-    background: rgba(255,255,255,0.05);
-}
-
-.profile:focus-visible {
-    outline: 2px solid var(--accent-light);
-    outline-offset: 2px;
-}
-
-.avatar {
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8b6cff,
-            #5d43c7
-        );
-
-    color: white;
-
-    font-weight: 700;
-}
-
-.profile-info {
-    flex: 1;
-}
-
-.profile-name {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.profile-role {
-    margin-top: 2px;
-
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.profile-arrow {
-    color: var(--text-muted);
-}
-
-/* -----------------------------
-   MAIN
------------------------------ */
-
-.main {
-    width: calc(100% - 255px);
-
-    margin-left: 255px;
-
-    padding: 28px 34px 30px;
-
-    min-height: 100vh;
-}
-
-/* -----------------------------
-   TOP BAR
------------------------------ */
-
-.topbar {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 34px;
-}
-
-.welcome {
-    flex: 1;
-}
-
-.welcome h1 {
-    font-size: 27px;
-    font-weight: 650;
-
-    letter-spacing: -0.4px;
-}
-
-.welcome p {
-    margin-top: 7px;
-
-    color: var(--text-secondary);
-
-    font-size: 15px;
-}
-
-/* Search */
-
-.search {
-    width: 300px;
-
-    position: relative;
-}
-
-.search input {
-    width: 100%;
-
-    padding: 13px 16px 13px 43px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: 11px;
-
-    outline: none;
-
-    color: var(--text);
-
-    font-size: 14px;
-
-    transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.search input::placeholder {
-    color: var(--text-muted);
-}
-
-.search input:focus {
-    border-color: rgba(124,77,255,0.6);
-
-    box-shadow:
-        0 0 0 3px rgba(124,77,255,0.1);
-}
-
-.search-icon {
-    position: absolute;
-
-    left: 15px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    color: var(--text-muted);
-
-    font-size: 17px;
-}
-
-/* Top actions */
-
-.top-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.icon-button {
-    width: 43px;
-    height: 43px;
-
-    border-radius: 11px;
-
-    border: 1px solid var(--border);
-
-    background: var(--surface);
-
-    color: var(--text-secondary);
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.icon-button:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-}
-
-/* -----------------------------
-   QUICK CARDS
------------------------------ */
-
-.quick-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-bottom: 27px;
-}
-
-.quick-card {
-    min-height: 220px;
-
-    padding: 22px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s ease,
-        border 0.2s ease,
-        background 0.2s ease;
-}
-
-.quick-card:hover {
-    transform: translateY(-3px);
-
-    background: var(--surface-2);
-
-    border-color:
-        rgba(255,255,255,0.15);
-}
-
-.quick-card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 110px;
-    height: 110px;
-
-    right: -50px;
-    top: -50px;
-
-    border-radius: 50%;
-
-    background: var(--card-glow);
-
-    filter: blur(25px);
-
-    opacity: 0.18;
-}
-
-.quick-icon {
-    font-size: 32px;
-
-    margin-bottom: 20px;
-}
-
-.quick-card h2 {
-    font-size: 18px;
-    font-weight: 650;
-}
-
-.quick-card p {
-    margin-top: 8px;
-
-    min-height: 40px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-.card-button {
-    margin-top: 17px;
-
-    padding: 9px 15px;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    border: 1px solid var(--card-accent);
-
-    color: var(--card-accent);
-
-    cursor: pointer;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.card-button:hover {
-    background: var(--card-accent);
-    color: #090d16;
-}
-
-.card-purple {
-    --card-accent: #a78bfa;
-    --card-glow: #7c4dff;
-}
-
-.card-blue {
-    --card-accent: #5d9bff;
-    --card-glow: #367cff;
-}
-
-.card-green {
-    --card-accent: #59c98e;
-    --card-glow: #42c88a;
-}
-
-.card-orange {
-    --card-accent: #ffab5d;
-    --card-glow: #ff8b2c;
-}
-
-.card-cyan {
-    --card-accent: #50cbd8;
-    --card-glow: #36c6d6;
-}
-
-/* -----------------------------
-   CONTENT GRID
------------------------------ */
-
-.content-grid {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        330px;
-
-    gap: 24px;
-}
-
-/* Section */
-
-.section {
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-
-    padding: 22px;
-}
-
-.section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-}
-
-.section-header h2 {
-    font-size: 18px;
-    font-weight: 650;
-}
-
-.section-link {
-    border: none;
-    background: transparent;
-
-    color: var(--accent-light);
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-/* -----------------------------
-   LEARNING PATHS
------------------------------ */
-
-.learning-paths {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 12px;
-}
-
-.path {
-    padding: 17px;
-
-    border-radius: 12px;
-
-    border: 1px solid var(--border-soft);
-
-    background: rgba(255,255,255,0.025);
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-.path:hover {
-    background: var(--surface-hover);
-    transform: translateY(-2px);
-}
-
-.path-icon {
-    font-size: 25px;
-
-    margin-bottom: 16px;
-}
-
-.path h3 {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.path p {
-    margin-top: 5px;
-
-    color: var(--text-muted);
-
-    font-size: 12px;
-}
-
-/* Progress */
-
-.progress-row {
-    margin-top: 17px;
-
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.progress-bar {
-    height: 6px;
-
-    flex: 1;
-
-    background: #242d3e;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-
-    border-radius: 10px;
-
-    background: var(--path-color);
-
-    width: 0;
-}
-
-.progress-number {
-    color: var(--text-secondary);
-
-    font-size: 11px;
-
-    white-space: nowrap;
-}
-
-.path-button {
-    width: 100%;
-
-    margin-top: 14px;
-
-    padding: 8px;
-
-    border-radius: 7px;
-
-    border: 1px solid var(--border);
-
-    background: transparent;
-
-    color: var(--text-secondary);
-
-    cursor: pointer;
-
-    font-size: 12px;
-}
-
-.path-button:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-}
-
-/* -----------------------------
-   RIGHT COLUMN
------------------------------ */
-
-.right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Nepo */
-
-.nepo {
-    padding: 22px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(124,77,255,0.15),
-            transparent 45%
-        ),
-        var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-}
-
-.nepo-top {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-}
-
-.nepo-avatar {
-    width: 50px;
-    height: 50px;
-
-    border-radius: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #9181ff,
-            #5840c7
-        );
-
-    font-size: 27px;
-}
-
-.nepo-title {
-    font-size: 16px;
-    font-weight: 650;
-}
-
-.online {
-    margin-top: 4px;
-
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    color: var(--text-muted);
-
-    font-size: 12px;
-}
-
-.online-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: var(--green);
-
-    box-shadow:
-        0 0 8px rgba(66,200,138,0.5);
-}
-
-.nepo p {
-    margin-top: 18px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-
-    line-height: 1.55;
-}
-
-.nepo-button {
-    width: 100%;
-
-    margin-top: 17px;
-
-    padding: 11px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c4dff,
-            #6340d4
-        );
-
-    color: white;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.nepo-button:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 25px rgba(124,77,255,0.25);
-}
-
-/* Daily Goal */
-
-.goal {
-    padding: 22px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: var(--radius);
-}
-
-.goal h2 {
-    font-size: 16px;
-}
-
-.goal p {
-    margin-top: 9px;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-}
-
-
-.goal-count {
-    margin-top: 9px;
-
-    color: var(--text-muted);
-
-    font-size: 12px;
-}
-
-/* -----------------------------
-   RECOMMENDATION
------------------------------ */
-
-.recommendation {
-    margin-top: 22px;
-
-    padding: 20px 22px;
-
-    border-radius: var(--radius);
-
-    border: 1px solid rgba(124,77,255,0.22);
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(124,77,255,0.10),
-            rgba(124,77,255,0.025)
-        );
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-}
-
-.recommendation-label {
-    color: var(--accent-light);
-
-    font-size: 13px;
-
-    font-weight: 650;
-
-    margin-bottom: 7px;
-}
-
-.recommendation-text {
-    color: var(--text-secondary);
-
-    font-size: 13px;
-}
-
-.recommendation-button {
-    flex-shrink: 0;
-
-    padding: 10px 17px;
-
-    border-radius: 8px;
-
-    border: 1px solid rgba(167,139,250,0.35);
-
-    background: transparent;
-
-    color: var(--accent-light);
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-.recommendation-button:hover {
-    background: var(--accent-soft);
-}
-
-/* -----------------------------
-   FOOTER
------------------------------ */
-
-.footer {
-    margin-top: 28px;
-
-    display: flex;
-    justify-content: space-between;
-
-    color: var(--text-muted);
-
-    font-size: 11px;
-}
-
-.footer-links {
-    display: flex;
-    gap: 18px;
-}
-
-.footer a {
-    color: var(--text-muted);
-
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: var(--text-secondary);
-}
-
-/* -----------------------------
-   NEPO PRIMARY EXPERIENCE
------------------------------ */
-.nepo-hero {
-    display: grid;
-    grid-template-columns: minmax(280px, 0.62fr) minmax(620px, 1.38fr);
-    gap: 38px;
-    align-items: stretch;
-    margin-bottom: 38px;
-}
-
-.nepo-hero-copy {
-    padding: 26px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.eyebrow {
-    color: var(--accent-light);
-    font-size: 12px;
-    font-weight: 750;
-    letter-spacing: 1.8px;
-    margin-bottom: 12px;
-}
-
-.nepo-hero-copy h2 {
-    font-size: clamp(40px, 4.1vw, 62px);
-    line-height: 1.01;
-    letter-spacing: -2.1px;
-    max-width: 560px;
-}
-
-.nepo-hero-copy p {
-    margin-top: 24px;
-    max-width: 540px;
-    color: var(--text-secondary);
-    font-size: 16px;
-    line-height: 1.75;
-}
-
-.nepo-console {
-    min-height: 560px;
-    padding: 28px;
-    border: 1px solid rgba(124,77,255,0.30);
-    border-radius: 24px;
-    background:
-        radial-gradient(circle at 92% 0%, rgba(124,77,255,0.12), transparent 34%),
-        linear-gradient(145deg, rgba(17,22,35,0.98), rgba(10,14,24,0.98));
-    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
-    display: flex;
-    flex-direction: column;
-}
-
-.console-top {
-    display:flex;
-    align-items:center;
-    gap:13px;
-    padding-bottom:18px;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-}
-
-.nepo-avatar.large {
-    width:50px;
-    height:50px;
-    border-radius:15px;
-    font-size:27px;
-}
-
-.chat-preview {
-    flex: 1;
-    min-height: 210px;
-    margin: 18px 0;
-    padding: 22px;
-    border-radius: 18px;
-    background: rgba(4,7,14,0.58);
-    border: 1px solid rgba(255,255,255,0.055);
-    overflow: auto;
-}
-
-.chat-bubble {
-    display:inline-block;
-    max-width:86%;
-    padding:13px 16px;
-    border-radius:16px 16px 16px 5px;
-    background:#202943;
-    color:var(--text);
-    font-size:15px;
-    line-height:1.55;
-}
-
-.chat-hint {
-    margin-top:12px;
-    color:var(--text-muted);
-    font-size:13px;
-    line-height:1.55;
-}
-
-#learningInput {
-    width:100%;
-    min-height:112px;
-    resize:vertical;
-    padding:17px 18px;
-    border-radius:16px;
-    border:1px solid var(--border);
-    outline:none;
-    background:rgba(5,9,17,0.86);
-    color:var(--text);
-    font-size:15px;
-    line-height:1.55;
-}
-
-#learningInput:focus {
-    border-color:rgba(124,77,255,0.65);
-    box-shadow:0 0 0 3px rgba(124,77,255,0.10);
-}
-
-#learningInput::placeholder { color:var(--text-muted); }
-
-.console-actions {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    margin-top:14px;
-}
-
-.mode-buttons { display:flex; gap:8px; flex-wrap:wrap; }
-
-.mode-button {
-    padding:10px 13px;
-    border-radius:10px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,0.025);
-    color:var(--text-secondary);
-    cursor:pointer;
-}
-
-.mode-button.active, .mode-button:hover {
-    color:var(--text);
-    border-color:rgba(124,77,255,0.55);
-    background:var(--accent-soft);
-}
-
-.start-button {
-    padding:13px 20px;
-    border:0;
-    border-radius:11px;
-    background:linear-gradient(135deg,#7c4dff,#6340d4);
-    color:white;
-    font-weight:650;
-    cursor:pointer;
-    white-space:nowrap;
-}
-
-.start-button:hover {
-    transform:translateY(-1px);
-    box-shadow:0 8px 25px rgba(124,77,255,0.25);
-}
-
-.console-note {
-    margin-top:11px;
-    color:var(--text-muted);
-    font-size:12px;
-}
-
-.learning-space, .approach-card { margin-bottom:24px; }
-.learning-space { padding:24px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); }
-.section-header { margin-bottom:18px; }
-.section-header h2 { font-size:24px; }
-.journey-empty { display:flex; align-items:center; gap:16px; padding:22px; border:1px dashed rgba(255,255,255,0.13); border-radius:14px; background:rgba(255,255,255,0.018); }
-.journey-icon { font-size:31px; }
-.journey-empty h3 { font-size:16px; }
-.journey-empty p { margin-top:6px; color:var(--text-secondary); font-size:13px; line-height:1.55; }
-.journey-empty .card-button { margin-left:auto; flex-shrink:0; }
-.utility-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
-.utility-card { padding:18px; border:1px solid var(--border-soft); border-radius:13px; background:rgba(255,255,255,0.025); }
-.utility-icon { font-size:25px; margin-bottom:12px; }
-.utility-card h3 { font-size:15px; }
-.utility-card p { margin-top:6px; min-height:38px; color:var(--text-secondary); font-size:12px; line-height:1.5; }
-.utility-card .card-button { margin-top:12px; }
-.approach-card { display:flex; align-items:center; gap:18px; padding:23px; border:1px solid rgba(124,77,255,0.24); border-radius:var(--radius); background:linear-gradient(90deg,rgba(124,77,255,0.10),rgba(124,77,255,0.025)); }
-.approach-card h2 { font-size:19px; }
-.approach-card p { margin-top:8px; color:var(--text-secondary); font-size:13px; line-height:1.6; max-width:850px; }
-
-.sidebar-toggle {
-    position: absolute;
-    top: 18px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--surface);
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
-}
-
-.sidebar-toggle:hover {
-    color: var(--text);
-    background: var(--surface-hover);
-}
-
-.guest-profile {
-    padding:12px;
-    border:1px solid var(--border-soft);
-    background:rgba(255,255,255,0.025);
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.guest-avatar {
-    background:linear-gradient(135deg,#5f6b80,#394457);
-}
-
-.profile-auth {
-    width:100%;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:7px;
-    margin-top:3px;
-}
-
-.profile-auth-button {
-    padding:8px 6px;
-    border-radius:8px;
-    border:1px solid var(--border);
-    background:transparent;
-    color:var(--text-secondary);
-    cursor:pointer;
-    font-size:11px;
-    font-weight:600;
-}
-
-.profile-auth-button:hover {
-    color:var(--text);
-    background:var(--surface-hover);
-}
-
-.profile-auth-button.primary {
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#fff;
-}
-
-/* Settings panel */
-.settings-panel { position:fixed; inset:0; background:rgba(0,0,0,0.58); display:none; align-items:center; justify-content:center; z-index:100; padding:20px; }
-.settings-panel.open { display:flex; }
-.settings-card { width:min(520px,100%); max-height:90vh; overflow:auto; padding:25px; border-radius:18px; border:1px solid var(--border); background:var(--surface); box-shadow:var(--shadow); }
-.settings-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
-.settings-head h2 { font-size:21px; }
-.close-settings { border:0; background:transparent; color:var(--text-secondary); font-size:22px; cursor:pointer; }
-.setting-row { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:16px 0; border-top:1px solid var(--border-soft); }
-.setting-row h3 { font-size:14px; }
-.setting-row p { margin-top:4px; color:var(--text-muted); font-size:12px; line-height:1.45; }
-.toggle { width:46px; height:25px; border:0; border-radius:20px; background:#30384a; cursor:pointer; position:relative; flex-shrink:0; }
-.toggle::after { content:""; position:absolute; width:19px; height:19px; top:3px; left:3px; border-radius:50%; background:#fff; transition:left .18s ease; }
-.toggle.on { background:var(--accent); }
-.toggle.on::after { left:24px; }
-
-/* -----------------------------
-   RESPONSIVE
------------------------------ */
-
-@media (max-width: 1250px) {
-
-    .quick-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-    .learning-paths {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-}
-
-@media (max-width: 1150px) {
-    .nepo-hero {
-        grid-template-columns: minmax(240px, 0.55fr) minmax(500px, 1.45fr);
-        gap: 26px;
-    }
-
-    .nepo-console {
-        min-height: 520px;
-    }
-}
-
-@media (max-width: 950px) {
-
-    .sidebar {
-        width: 255px;
-        padding: 18px 10px;
-    }
-
-    .sidebar {
-        box-shadow: 12px 0 40px rgba(0,0,0,0.30);
-    }
-
-    body:not(.sidebar-collapsed) .sidebar {
-        transform: translateX(0);
-    }
-
-    body:not(.sidebar-collapsed) .main {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .main {
-        width: 100%;
-        margin-left: 0;
-        padding: 24px;
-    }
-
-    .nepo-hero {
-        grid-template-columns: 1fr;
-    }
-
-    .nepo-hero-copy {
-        padding-bottom: 0;
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-@media (max-width: 700px) {
-
-    .main {
-        padding: 18px;
-    }
-
-    .topbar {
-        flex-wrap: wrap;
-    }
-
-    .top-actions { width:auto; }
-    .nepo-console { min-height:0; }
-    .console-actions { align-items:stretch; flex-direction:column; }
-    .start-button { width:100%; }
-    .journey-empty { flex-direction:column; align-items:flex-start; }
-    .journey-empty .card-button { margin-left:0; }
-    .utility-grid { grid-template-columns:1fr; }
-    .approach-card { align-items:flex-start; }
-
-    .welcome {
-        width: 100%;
-        flex-basis: 100%;
-    }
-
-    .search {
-        flex: 1;
-        width: auto;
-    }
-
-    .quick-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-card {
-        min-height: 190px;
-    }
-
-    .learning-paths {
-        grid-template-columns: 1fr;
-    }
-
-    .recommendation {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-}
-
-
-/* -------------------------------------------------------------
-   NEPO CONVERSATION HOME — clean public starting point
-   ------------------------------------------------------------- */
-.nepo-hero {
-    display: block;
-    margin-bottom: 34px;
-}
-
-.nepo-console {
-    width: min(100%, 1080px);
-    margin: 0 auto;
-    padding: 24px;
-}
-
-.nepo-conversation {
-    display: flex;
-    flex-direction: column;
-    min-height: 250px;
-    margin-top: 22px;
-    padding: 24px;
-    background:
-        radial-gradient(circle at 85% 0%, rgba(124,77,255,0.10), transparent 42%),
-        #0c111c;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-}
-
-.nepo-greeting {
-    display: inline-flex;
-    align-self: flex-start;
-    max-width: 82%;
-    padding: 12px 16px;
-    background: #1c2740;
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 15px 15px 15px 5px;
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.nepo-composer {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    padding-top: 28px;
-}
-
-.nepo-composer textarea {
-    width: 100%;
-    min-height: 94px;
-    resize: vertical;
-    padding: 4px 2px;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.nepo-composer textarea::placeholder {
-    color: var(--text-muted);
-}
-
-.nepo-composer-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border-soft);
-}
-
-.nepo-console .console-note {
-    margin-top: 12px;
-    text-align: center;
-}
-
-@media (max-width: 760px) {
-    .nepo-console {
-        padding: 16px;
-    }
-
-    .nepo-conversation {
-        padding: 18px;
-    }
-
-    .nepo-greeting {
-        max-width: 100%;
-    }
-
-    .nepo-composer-footer {
-        align-items: stretch;
-        flex-direction: column;
-    }
-}
-
+:root{
+ --bg:#070a14;--surface:#101626;--surface2:#151c2f;--border:#27324a;
+ --text:#f5f7ff;--muted:#a9b3c8;--dim:#707c94;
+ --accent:#7650ff;--accent2:#a98cff;--soft:rgba(118,80,255,.14);
+ --green:#55d394;--radius:18px;--shadow:0 24px 70px rgba(0,0,0,.32)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ min-height:100vh;color:var(--text);
+ font-family:"Segoe UI",Inter,system-ui,sans-serif;
+ background:radial-gradient(circle at 82% 0%,rgba(118,80,255,.11),transparent 30%),var(--bg);
+ overflow-x:hidden
+}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh}
+.sidebar{
+ position:fixed;inset:0 auto 0 0;width:258px;padding:22px 16px;
+ background:rgba(9,13,24,.97);border-right:1px solid rgba(255,255,255,.075);
+ z-index:50;display:flex;flex-direction:column;overflow-y:auto;transition:.22s
+}
+.brand{padding:4px 10px 25px}.brand-row{display:flex;align-items:center;gap:11px}
+.brand-symbol{font-size:31px;color:#a98cff;text-shadow:0 0 18px #7650ff80}
+.brand-name{font-size:22px;font-weight:800;letter-spacing:2px}
+.brand-subtitle{margin-top:9px;color:var(--muted);font-size:12px}
+.sidebar-toggle,.sidebar-reopen{
+ width:38px;height:38px;border:1px solid var(--border);border-radius:11px;
+ background:var(--surface);color:var(--muted);font-size:22px
+}
+.sidebar-toggle{position:absolute;right:9px;top:17px}
+.sidebar-reopen{position:fixed;left:12px;top:17px;display:none;z-index:60}
+body.sidebar-collapsed .sidebar{transform:translateX(-100%)}
+body.sidebar-collapsed .sidebar-reopen{display:block}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav-divider{height:1px;background:rgba(255,255,255,.075);margin:17px 10px}
+.nav-item{
+ width:100%;display:flex;align-items:center;gap:13px;padding:11px 12px;
+ border:1px solid transparent;border-radius:11px;background:transparent;
+ color:var(--muted);text-decoration:none;font-size:14px;text-align:left
+}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.active{background:var(--soft);border-color:#7650ff40;color:#c2b3ff}
+.nav-icon{width:21px;text-align:center}
+.sidebar-bottom{margin-top:auto;padding-top:20px}
+.guest-card{padding:13px;border:1px solid rgba(255,255,255,.075);border-radius:14px;background:#ffffff06}
+.guest-top{display:flex;align-items:center;gap:10px}
+.guest-avatar{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:#46516a;font-weight:800}
+.guest-name{font-weight:700;font-size:14px}.guest-role{color:var(--dim);font-size:12px;margin-top:2px}
+.auth-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.auth-buttons button{padding:8px 5px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:11px;font-weight:700}
+.auth-buttons .primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.main{margin-left:258px;min-height:100vh;padding:24px 34px 30px}
+.topbar{display:flex;align-items:center;gap:18px;margin-bottom:28px}.welcome{flex:1}
+.welcome h1{font-size:27px;letter-spacing:-.5px}.welcome p{margin-top:6px;color:var(--muted);font-size:15px}
+.search{width:310px;position:relative}.search input{
+ width:100%;height:46px;padding:0 15px 0 43px;border:1px solid var(--border);
+ border-radius:12px;background:var(--surface);color:var(--text);outline:0
+}
+.search input:focus{border-color:#7650ffb3;box-shadow:0 0 0 3px #7650ff1a}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--dim)}
+.top-actions{display:flex;gap:9px}.icon-btn{
+ width:46px;height:46px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--muted)
+}
+.hero{
+ position:relative;overflow:hidden;border:1px solid #7650ff4d;border-radius:25px;
+ background:radial-gradient(circle at 82% 8%,#7650ff29,transparent 30%),linear-gradient(145deg,#11182a,#090d18);
+ box-shadow:var(--shadow)
+}
+.hero-inner{display:grid;grid-template-columns:290px 1fr;min-height:515px}
+.nepo-visual{display:grid;place-items:center;position:relative}.nepo-glow{
+ position:absolute;width:250px;height:250px;border-radius:50%;background:#5b4cff2e;filter:blur(45px)
+}
+.robot{position:relative;width:175px;height:205px;filter:drop-shadow(0 20px 25px #0008)}
+.robot-dot{position:absolute;left:77px;top:0;width:20px;height:20px;border-radius:50%;background:#9d8bff;box-shadow:0 0 18px var(--accent)}
+.robot-antenna{position:absolute;left:84px;top:18px;width:7px;height:24px;background:#c5b8ff;border-radius:5px}
+.robot-head{
+ position:absolute;left:20px;top:38px;width:135px;height:88px;border-radius:34px;
+ background:linear-gradient(145deg,#eef1ff,#aeb7d0);border:5px solid #7773c8
+}
+.robot-screen{position:absolute;left:16px;top:14px;width:100px;height:55px;border-radius:21px;background:#0a1020}
+.eye{position:absolute;top:18px;width:11px;height:17px;border-radius:8px;background:#6d83ff;box-shadow:0 0 10px #6d83ff}
+.eye.left{left:29px}.eye.right{right:29px}
+.smile{position:absolute;left:42px;top:35px;width:17px;height:9px;border-bottom:3px solid #8d76ff;border-radius:0 0 15px 15px}
+.robot-body{
+ position:absolute;left:42px;top:116px;width:92px;height:78px;border-radius:28px 28px 22px 22px;
+ background:linear-gradient(145deg,#e5e8f5,#9da8c2);border:4px solid #7773c8
+}
+.trident{position:absolute;left:34px;top:17px;color:#5b51c7;font-size:34px}
+.arm{position:absolute;top:130px;width:20px;height:68px;border-radius:14px;background:#b6bfd4}
+.arm.left{left:17px;transform:rotate(12deg)}.arm.right{right:17px;transform:rotate(-12deg)}
+.hero-content{padding:38px 42px 32px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--accent2);margin-bottom:11px}
+.hero-content h2{font-size:clamp(34px,3.2vw,52px);line-height:1.04;letter-spacing:-1.8px}
+.hero-content>p{margin-top:17px;color:var(--muted);font-size:15px;line-height:1.65;max-width:650px}
+.composer{
+ margin-top:27px;border:1px solid #7650ffb3;border-radius:17px;background:#04070fc4;
+ box-shadow:0 0 0 4px #7650ff0f
+}
+.composer textarea{display:block;width:100%;min-height:88px;resize:vertical;padding:18px;border:0;outline:0;background:transparent;color:var(--text);font-size:15px}
+.composer textarea::placeholder{color:#73809a}
+.composer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 11px 11px}
+.mode-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.mode-btn{padding:9px 13px;border:1px solid var(--border);border-radius:10px;background:#fff04;color:var(--muted);font-size:13px}
+.mode-btn.active,.mode-btn:hover{border-color:#7650ff8c;background:var(--soft);color:var(--text)}
+.start{padding:12px 19px;border:0;border-radius:10px;background:linear-gradient(135deg,#7c53ff,#5f3bd1);color:#fff;font-weight:750}
+.hero-note{text-align:center;color:var(--dim);font-size:12px;margin-top:12px}
+.topic-strip{padding:20px 28px 24px;border-top:1px solid rgba(255,255,255,.075)}
+.topic-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}.topic-head h3{font-size:14px}.topic-head span{color:var(--dim);font-size:12px}
+.topics{display:flex;gap:8px;flex-wrap:wrap}.topic{
+ border:1px solid var(--border);background:#fff04;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:12px
+}.topic:hover{border-color:#7650ff80;color:var(--text);background:var(--soft)}
+.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;margin-top:24px}
+.section,.side-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.section{padding:23px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-head h2{font-size:19px}.section-head p{margin-top:4px;color:var(--muted);font-size:12px}.section-link{border:0;background:transparent;color:var(--accent2);font-size:12px}
+.journey-empty{display:flex;align-items:center;gap:16px;padding:22px;border:1px dashed #ffffff26;border-radius:14px;background:#ffffff03}
+.empty-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:13px;background:var(--soft);font-size:23px}
+.journey-empty h3{font-size:15px}.journey-empty p{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.5}
+.empty-action{margin-left:auto;padding:9px 13px;border:1px solid #7650ff73;border-radius:9px;background:transparent;color:var(--accent2)}
+.utility-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:13px}
+.utility{padding:18px;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:#ffffff04}
+.utility-icon{font-size:24px}.utility h3{margin-top:12px;font-size:14px}.utility p{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.5}
+.utility button{margin-top:13px;padding:8px 11px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-size:11px}
+.side-stack{display:flex;flex-direction:column;gap:15px}.side-card{padding:19px}.side-card h3{font-size:15px}.side-card>p{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.55}
+.explore-list{display:grid;gap:8px;margin-top:13px}.explore-item{
+ width:100%;padding:11px 12px;border:1px solid rgba(255,255,255,.075);border-radius:10px;background:#fff03;color:var(--muted);text-align:left;font-size:12px
+}.explore-item:hover{background:var(--surface2);color:var(--text)}
+.nepo-quote{margin-top:13px;padding:15px;border:1px solid #7650ff2e;border-radius:12px;background:#7650ff0f;color:#c9c2e9;font-size:13px;line-height:1.6}
+.quick-list{display:grid;margin-top:10px}.quick-action{display:flex;justify-content:space-between;padding:11px 4px;border:0;border-bottom:1px solid rgba(255,255,255,.075);background:transparent;color:var(--muted);font-size:12px;text-align:left}
+.quick-action:hover{color:var(--text)}
+.approach{margin-top:22px;padding:22px;display:flex;align-items:center;gap:17px;border:1px solid #7650ff3b;border-radius:var(--radius);background:linear-gradient(90deg,#7650ff1a,#7650ff06)}
+.approach-icon{font-size:32px}.approach h2{font-size:18px}.approach p{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.6}
+.footer{display:flex;justify-content:space-between;gap:15px;margin-top:24px;color:var(--dim);font-size:11px}.footer-links{display:flex;gap:17px}.footer a{color:var(--dim);text-decoration:none}
+.settings-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;background:#000a}
+.settings-overlay.open{display:flex}.settings-card{width:min(560px,100%);max-height:90vh;overflow:auto;padding:25px;border:1px solid var(--border);border-radius:20px;background:#101626;box-shadow:var(--shadow)}
+.settings-head{display:flex;justify-content:space-between;align-items:center}.settings-head h2{font-size:22px}.close{border:0;background:transparent;color:var(--muted);font-size:27px}
+.setting{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0;border-top:1px solid rgba(255,255,255,.075);margin-top:17px}.setting h3{font-size:14px}.setting p{margin-top:4px;color:var(--dim);font-size:12px;line-height:1.5}
+.toggle{width:47px;height:25px;border:0;border-radius:20px;background:#30394d;position:relative}.toggle:after{content:"";position:absolute;width:19px;height:19px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.18s}.toggle.on{background:var(--accent)}.toggle.on:after{left:25px}
+.theme-buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.theme-btn{padding:8px 11px;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--muted);font-size:12px}.theme-btn.active{border-color:var(--accent);color:var(--text);background:var(--soft)}
+.light{--bg:#f4f6fb;--surface:#fff;--surface2:#f0f2f8;--border:#d8ddeb;--text:#172033;--muted:#5f6b82;--dim:#8791a5}
+.light .sidebar{background:#f8fafff7}.light .hero{background:linear-gradient(145deg,#fff,#f4f6fc)}.light .composer{background:#f5f7fc}.light .settings-card{background:#fff}
+@media(max-width:1150px){.hero-inner{grid-template-columns:220px 1fr}.content-grid{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);box-shadow:15px 0 45px #0008}.sidebar-reopen{display:block}.main{margin-left:0;padding:20px}.hero-inner{grid-template-columns:1fr}.nepo-visual{min-height:230px}.side-stack{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.main{padding:15px}.topbar{flex-wrap:wrap}.welcome{flex-basis:100%}.search{flex:1;width:auto}.hero-content{padding:28px 20px}.composer-bottom{flex-direction:column;align-items:stretch}.start{width:100%}.mode-btn{flex:1}.utility-grid,.side-stack{grid-template-columns:1fr}.journey-empty{align-items:flex-start;flex-direction:column}.empty-action{margin-left:0}.approach,.footer{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-
 <body>
-
-<button class="sidebar-reopen" id="sidebarReopen" type="button"
-        aria-label="Open sidebar" title="Open sidebar">›</button>
-
+<button class="sidebar-reopen" id="reopen">›</button>
 <div class="app">
-
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
-    <aside class="sidebar">
-
-        <div class="brand">
-
-            <button class="sidebar-toggle" id="sidebarToggle" type="button"
-                    aria-label="Close sidebar" title="Close sidebar">‹</button>
-
-            <div class="brand-row">
-
-                <div class="brand-icon">♆</div>
-
-                <div class="brand-name">
-                    NEPTUNUS
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-
-        <nav class="nav-section">
-
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">⌂</span>
-                <span>Home</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▷</span>
-                <span>Continue Learning</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▣</span>
-                <span>My Learning</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">🔖</span>
-                <span>Saved Knowledge</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▥</span>
-                <span>Progress</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">◌</span>
-                <span>Nepo</span>
-            </a>
-
-        </nav>
-
-
-        <div class="nav-divider"></div>
-
-
-        <nav>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">⚙</span>
-                <span>Settings</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">♙</span>
-                <span>Account</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▣</span>
-                <span>Privacy</span>
-            </a>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">?</span>
-                <span>Help & Support</span>
-            </a>
-
-        </nav>
-
-
-        <div class="sidebar-bottom">
-
-            <div class="guest-profile" aria-label="Account area">
-
-                <div class="avatar guest-avatar">
-                    G
-                </div>
-
-                <div class="profile-info">
-
-                    <div class="profile-name">
-                        Student
-                    </div>
-
-                    <div class="profile-role">
-                        Public access
-                    </div>
-
-                </div>
-
-                <div class="profile-auth">
-                    <button class="profile-auth-button" type="button" data-action="signin">Sign in</button>
-                    <button class="profile-auth-button primary" type="button" data-action="signup">Create account</button>
-                </div>
-
-            </div>
-
-        </div>
-
-    </aside>
-
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
-    <main class="main">
-
-
-        <!-- TOP BAR -->
-        <header class="topbar">
-            <div class="welcome">
-                <h1>Welcome to Neptunus 👋</h1>
-                <p>What would you like to learn today?</p>
-            </div>
-
-            <div class="search">
-                <span class="search-icon">⌕</span>
-                <input type="text" placeholder="Search anything..." aria-label="Search">
-            </div>
-
-            <div class="top-actions">
-                <button class="icon-button" type="button" title="Settings" data-action="settings">⚙</button>
-            </div>
-        </header>
-
-        <!-- PRIMARY NEPO EXPERIENCE -->
-        <section class="nepo-hero" id="nepoHero">
-            <div class="nepo-console" id="nepoConsole">
-                <div class="console-top">
-                    <div class="nepo-avatar large">🤖</div>
-                    <div>
-                        <div class="nepo-title">Nepo</div>
-                        <div class="online"><span class="online-dot"></span>Ready</div>
-                    </div>
-                </div>
-
-                <div class="nepo-conversation" id="nepoConversation">
-                    <div class="nepo-greeting" id="nepoGreeting">Hi. What would you like to learn, understand, or practice?</div>
-
-                    <div class="nepo-composer">
-                        <textarea id="learningInput" placeholder="Ask Nepo anything..." aria-label="Ask Nepo anything"></textarea>
-
-                        <div class="nepo-composer-footer">
-                            <div class="mode-buttons" role="group" aria-label="Learning mode">
-                                <button class="mode-button active" data-mode="Learn" type="button">📚 Learn</button>
-                                <button class="mode-button" data-mode="Practice" type="button">🛠 Practice</button>
-                                <button class="mode-button" data-mode="Explain" type="button">💡 Explain</button>
-                            </div>
-                            <button class="start-button" id="startLearning" type="button">Start learning →</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="console-note">Nepo helps you learn, practice, and understand — across any field.</div>
-            </div>
-        </section>
-
-        <!-- USER LEARNING SPACE -->
-        <section class="learning-space">
-            <div class="section-header">
-                <div>
-                    <div class="eyebrow">YOUR LEARNING SPACE</div>
-                    <h2>Learning journeys</h2>
-                </div>
-                <button class="section-link" type="button">View all</button>
-            </div>
-
-            <div class="journey-empty">
-                <div class="journey-icon">📖</div>
-                <div>
-                    <h3>Your learning journeys will appear here</h3>
-                    <p>Start something with Nepo and your active lessons, courses, practice sessions, and progress will be organized here.</p>
-                </div>
-                <button class="card-button" type="button" data-focus="nepo">Start something new</button>
-            </div>
-
-            <div class="utility-grid">
-                <article class="utility-card">
-                    <div class="utility-icon">🎓</div>
-                    <h3>My Learning</h3>
-                    <p>Courses and adaptive learning journeys.</p>
-                    <button class="card-button" type="button">Open</button>
-                </article>
-                <article class="utility-card">
-                    <div class="utility-icon">📊</div>
-                    <h3>Progress</h3>
-                    <p>Track skills, lessons, practice, and completed learning.</p>
-                    <button class="card-button" type="button">View progress</button>
-                </article>
-                <article class="utility-card">
-                    <div class="utility-icon">🔖</div>
-                    <h3>Saved Knowledge</h3>
-                    <p>Keep useful explanations, notes, and resources.</p>
-                    <button class="card-button" type="button">Open</button>
-                </article>
-            </div>
-        </section>
-
-        <section class="approach-card">
-            <div class="nepo-avatar">🤖</div>
-            <div>
-                <div class="eyebrow">THE NEPTUNUS APPROACH</div>
-                <h2>You choose what to learn. Nepo helps you learn it.</h2>
-                <p>Nepo is designed around guided learning rather than simply returning answers. It can adapt explanations, pace, and teaching approach while keeping you in control.</p>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            <div>
-                © 2026 Neptunus · Veritas Educational
-            </div>
-
-            <div class="footer-links">
-
-                <a href="#">
-                    Privacy
-                </a>
-
-                <a href="#">
-                    Terms
-                </a>
-
-                <a href="#">
-                    Help
-                </a>
-
-            </div>
-
-        </footer>
-
-
-    </main>
-
+<aside class="sidebar">
+<button class="sidebar-toggle" id="collapse">‹</button>
+<div class="brand"><div class="brand-row"><div class="brand-symbol">♆</div><div class="brand-name">NEPTUNUS</div></div><div class="brand-subtitle">Your Adaptive Learning Companion</div></div>
+<nav class="nav">
+<a class="nav-item active" href="#home"><span class="nav-icon">⌂</span>Home</a>
+<a class="nav-item" href="#nepo"><span class="nav-icon">🤖</span>Nepo Classroom</a>
+<a class="nav-item" href="#learning"><span class="nav-icon">▣</span>My Learning</a>
+<a class="nav-item" href="#practice"><span class="nav-icon">⚒</span>Practice Zone</a>
+<a class="nav-item" href="#learning"><span class="nav-icon">⌁</span>Progress</a>
+<a class="nav-item" href="#learning"><span class="nav-icon">🔖</span>Saved Knowledge</a>
+</nav>
+<div class="nav-divider"></div>
+<nav class="nav">
+<button class="nav-item" data-settings><span class="nav-icon">⚙</span>Settings</button>
+<button class="nav-item" data-auth><span class="nav-icon">♙</span>Account</button>
+<button class="nav-item" data-auth><span class="nav-icon">▣</span>Privacy</button>
+<button class="nav-item" data-support><span class="nav-icon">?</span>Help &amp; Support</button>
+</nav>
+<div class="sidebar-bottom"><div class="guest-card"><div class="guest-top"><div class="guest-avatar">G</div><div><div class="guest-name">Guest</div><div class="guest-role">Public access</div></div></div><div class="auth-buttons"><button data-auth>Sign in</button><button class="primary" data-auth>Create account</button></div></div></div>
+</aside>
+
+<main class="main" id="home">
+<header class="topbar"><div class="welcome"><h1>Welcome to Neptunus 👋</h1><p>What will we learn together today?</p></div><div class="search"><span class="search-icon">⌕</span><input placeholder="Search anything..." aria-label="Search"></div><div class="top-actions"><button class="icon-btn" data-settings>⚙</button></div></header>
+
+<section class="hero" id="nepo">
+<div class="hero-inner">
+<div class="nepo-visual"><div class="nepo-glow"></div><div class="robot"><div class="robot-antenna"></div><div class="robot-dot"></div><div class="robot-head"><div class="robot-screen"><span class="eye left"></span><span class="eye right"></span><span class="smile"></span></div></div><div class="robot-body"><div class="trident">♆</div></div><div class="arm left"></div><div class="arm right"></div></div></div>
+<div class="hero-content">
+<div class="eyebrow">NEPO · YOUR TEACHER</div>
+<h2>What will be our topic today?</h2>
+<p>Tell Nepo what you want to learn, understand, or practise. The teaching experience will adapt around the topic you choose.</p>
+<div class="composer"><textarea id="topicInput" placeholder="Type your topic or question here..." aria-label="Topic or question"></textarea><div class="composer-bottom"><div class="mode-buttons"><button class="mode-btn active">📚 Learn</button><button class="mode-btn">💡 Explain</button><button class="mode-btn">🎯 Practice</button><button class="mode-btn">📊 Quiz</button></div><button class="start" id="start">Start learning →</button></div></div>
+<div class="hero-note">Nepo is designed to teach — not simply return answers.</div>
+</div></div>
+<div class="topic-strip"><div class="topic-head"><h3>Explore a topic</h3><span>Suggestions only — Nepo doesn't choose for you.</span></div><div class="topics"><button class="topic">Networking</button><button class="topic">Programming</button><button class="topic">Cybersecurity</button><button class="topic">Artificial Intelligence</button><button class="topic">Windows &amp; Servers</button><button class="topic">Languages</button></div></div>
+</section>
+
+<div class="content-grid"><div>
+<section class="section" id="learning"><div class="section-head"><div><h2>Your Learning Journey</h2><p>Your real learning activity will appear here.</p></div><button class="section-link">View all</button></div>
+<div class="journey-empty"><div class="empty-icon">📖</div><div><h3>No learning journey yet</h3><p>Start something with Nepo and your actual lessons, practice sessions, saved knowledge, and progress can appear here.</p></div><button class="empty-action" data-focus>Start something new</button></div>
+<div class="utility-grid"><article class="utility"><div class="utility-icon">🎓</div><h3>My Learning</h3><p>Your courses and learning journeys will appear here when you create them.</p><button>Open</button></article><article class="utility" id="practice"><div class="utility-icon">🎯</div><h3>Practice Zone</h3><p>Practice activities will become available as Nepo creates real learning sessions.</p><button>Explore</button></article><article class="utility"><div class="utility-icon">🔖</div><h3>Saved Knowledge</h3><p>Save useful explanations, notes, resources, and generated learning material.</p><button>Open</button></article></div>
+</section>
+<section class="approach"><div class="approach-icon">🤖</div><div><div class="eyebrow">THE NEPTUNUS APPROACH</div><h2>You choose what to learn. Nepo helps you learn it.</h2><p>Nepo is designed around guided learning. If something isn't clear, the teaching approach can change instead of simply repeating the same answer.</p></div></section>
 </div>
 
+<aside class="side-stack">
+<section class="side-card"><h3>Explore learning</h3><p>Start anywhere. These are examples of areas Nepo can eventually teach through the platform.</p><div class="explore-list"><button class="explore-item">💻 Technology &amp; Programming →</button><button class="explore-item">🛡 Cybersecurity →</button><button class="explore-item">🧠 AI &amp; Machine Learning →</button><button class="explore-item">🌐 Languages →</button></div></section>
+<section class="side-card"><h3>What makes Nepo different?</h3><div class="nepo-quote">“If the first explanation doesn't make sense, we don't just repeat it. We try another way.”</div></section>
+<section class="side-card"><h3>Quick actions</h3><div class="quick-list"><button class="quick-action" data-focus>Ask Nepo anything <span>→</span></button><button class="quick-action" data-settings>Preferences <span>→</span></button><button class="quick-action" data-auth>Sign in / Create account <span>→</span></button></div></section>
+</aside></div>
 
-<!--
-    Current dashboard is a UI prototype. Learning statistics and account information remain neutral until connected to real user data.
+<footer class="footer"><span>© 2026 Neptunus · Veritas Educational</span><span class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a></span></footer>
+</main></div>
 
-    Planned:
-    - Authentication
-    - Student profiles
-    - Learning progress
-    - Neptunus conversations
-    - Saved knowledge
-    - Search
-    - Personal themes
-    - Database
--->
-
-<div class="settings-panel" id="settingsPanel" aria-hidden="true">
-    <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
-        <div class="settings-head">
-            <h2 id="settingsTitle">Neptunus preferences</h2>
-            <button class="close-settings" type="button" aria-label="Close settings">×</button>
-        </div>
-        <p style="color:var(--text-secondary);font-size:13px;line-height:1.6;margin-bottom:8px;">You stay in control of how Nepo adapts to you. These options are enabled by default and can be changed at any time.</p>
-        <div class="setting-row">
-            <div><h3>Adaptive Learning</h3><p>Adjust explanations, teaching pace, and learning approach.</p></div>
-            <button class="toggle on" type="button" aria-pressed="true" data-setting="adaptive-learning"></button>
-        </div>
-        <div class="setting-row">
-            <div><h3>Adaptive Character</h3><p>Allow Nepo to adapt its communication style to you.</p></div>
-            <button class="toggle on" type="button" aria-pressed="true" data-setting="adaptive-character"></button>
-        </div>
-        <div class="setting-row">
-            <div><h3>Learning Memory</h3><p>Allow relevant learning context to persist between conversations.</p></div>
-            <button class="toggle on" type="button" aria-pressed="true" data-setting="learning-memory"></button>
-        </div>
-        <div class="setting-row">
-            <div><h3>Personalization</h3><p>Use preferences and learning history to improve interactions.</p></div>
-            <button class="toggle on" type="button" aria-pressed="true" data-setting="personalization"></button>
-        </div>
-    </div>
-</div>
+<div class="settings-overlay" id="settings"><div class="settings-card"><div class="settings-head"><h2>Neptunus preferences</h2><button class="close" id="close">×</button></div>
+<p style="color:var(--muted);font-size:13px;line-height:1.6;margin-top:10px">Frontend preferences for testing. Account-backed settings come later.</p>
+<div class="setting"><div><h3>Adaptive Learning</h3><p>Adjust explanations, pace, and teaching approach.</p></div><button class="toggle on"></button></div>
+<div class="setting"><div><h3>Adaptive Character</h3><p>Allow Nepo to adapt its communication style.</p></div><button class="toggle on"></button></div>
+<div class="setting"><div><h3>Learning Memory</h3><p>Preserve relevant learning context when an account supports it.</p></div><button class="toggle on"></button></div>
+<div class="setting"><div><h3>Personalization</h3><p>Use preferences and real learning history to improve interactions.</p></div><button class="toggle on"></button></div>
+<div class="setting" style="display:block"><h3>Appearance</h3><p>Local frontend testing only.</p><div class="theme-buttons"><button class="theme-btn active" data-theme="dark">Dark</button><button class="theme-btn" data-theme="light">Light</button></div></div>
+<div class="setting" style="display:block"><h3>Accent</h3><p>Try a different Neptunus accent.</p><div class="theme-buttons"><button class="theme-btn" data-accent="#7650ff">Violet</button><button class="theme-btn" data-accent="#2f7cff">Blue</button><button class="theme-btn" data-accent="#00a6a6">Cyan</button><button class="theme-btn" data-accent="#d66bff">Pink</button></div></div>
+</div></div>
 
 <script>
-    const settingsPanel = document.getElementById("settingsPanel");
-    const nepoGreeting = document.getElementById("nepoGreeting");
-    const learningInput = document.getElementById("learningInput");
-    const sidebarToggle = document.getElementById("sidebarToggle");
-    const sidebarReopen = document.getElementById("sidebarReopen");
-
-    // Sidebar is user-controlled and remembered locally.
-    const savedSidebarState = localStorage.getItem("neptunus.sidebarCollapsed");
-    if (savedSidebarState === "true") {
-        document.body.classList.add("sidebar-collapsed");
-    }
-
-    function setSidebarCollapsed(collapsed) {
-        document.body.classList.toggle("sidebar-collapsed", collapsed);
-        localStorage.setItem("neptunus.sidebarCollapsed", String(collapsed));
-        sidebarToggle.setAttribute("aria-label", collapsed ? "Sidebar closed" : "Close sidebar");
-    }
-
-    sidebarToggle.addEventListener("click", () => setSidebarCollapsed(true));
-    sidebarReopen.addEventListener("click", () => setSidebarCollapsed(false));
-
-    document.querySelectorAll('[data-action="settings"]').forEach(btn => {
-        btn.addEventListener("click", () => {
-            settingsPanel.classList.add("open");
-            settingsPanel.setAttribute("aria-hidden", "false");
-        });
-    });
-
-    document.querySelector(".close-settings").addEventListener("click", () => {
-        settingsPanel.classList.remove("open");
-        settingsPanel.setAttribute("aria-hidden", "true");
-    });
-
-    settingsPanel.addEventListener("click", e => {
-        if (e.target === settingsPanel) {
-            settingsPanel.classList.remove("open");
-            settingsPanel.setAttribute("aria-hidden", "true");
-        }
-    });
-
-    document.querySelectorAll(".toggle").forEach(toggle => {
-        toggle.addEventListener("click", () => {
-            const enabled = toggle.classList.toggle("on");
-            toggle.setAttribute("aria-pressed", String(enabled));
-        });
-    });
-
-    document.querySelectorAll(".mode-button").forEach(button => {
-        button.addEventListener("click", () => {
-            document.querySelectorAll(".mode-button").forEach(b => b.classList.remove("active"));
-            button.classList.add("active");
-        });
-    });
-
-    document.querySelectorAll('[data-focus="nepo"]').forEach(button => {
-        button.addEventListener("click", () => {
-            learningInput.focus();
-            learningInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        });
-    });
-
-    document.getElementById("startLearning").addEventListener("click", () => {
-        const text = learningInput.value.trim();
-        if (!text) {
-            learningInput.focus();
-            return;
-        }
-
-        nepoGreeting.textContent = "Got it. Let’s work through that together.";
-        learningInput.value = "";
-        learningInput.focus();
-    });
-
-    // Public mode: authentication belongs to the account area, not the AI workspace.
-    document.querySelectorAll('[data-action="signin"], [data-action="signup"]').forEach(btn => {
-        btn.addEventListener("click", () => {
-            alert("Authentication will be connected in the backend phase.");
-        });
-    });
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const body=document.body,settings=$("#settings"),input=$("#topicInput");
+$("#collapse").onclick=()=>{body.classList.add("sidebar-collapsed");localStorage.setItem("neptunus.sidebarCollapsed","true")};
+$("#reopen").onclick=()=>{body.classList.remove("sidebar-collapsed");localStorage.setItem("neptunus.sidebarCollapsed","false")};
+if(localStorage.getItem("neptunus.sidebarCollapsed")==="true")body.classList.add("sidebar-collapsed");
+$$("[data-settings]").forEach(b=>b.onclick=()=>settings.classList.add("open"));
+$("#close").onclick=()=>settings.classList.remove("open");
+settings.onclick=e=>{if(e.target===settings)settings.classList.remove("open")};
+document.onkeydown=e=>{if(e.key==="Escape")settings.classList.remove("open")};
+$$(".toggle").forEach(t=>t.onclick=()=>{t.classList.toggle("on")});
+$$(".mode-btn").forEach(b=>b.onclick=()=>{$$(".mode-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+$$(".topic").forEach(b=>b.onclick=()=>{input.value=b.textContent.trim();$("#nepo").scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>input.focus(),250)});
+$$("[data-focus]").forEach(b=>b.onclick=()=>{input.focus();input.scrollIntoView({behavior:"smooth",block:"center"})});
+$("#start").onclick=()=>{if(!input.value.trim()){input.focus();return}input.style.boxShadow="0 0 0 3px #55d39422";setTimeout(()=>input.style.boxShadow="",900)};
+$$("[data-auth]").forEach(b=>b.onclick=()=>alert("Authentication is not connected yet. This is the frontend test state."));
+$$("[data-support]").forEach(b=>b.onclick=()=>alert("Help & Support will be connected during the platform/backend integration."));
+$$("[data-theme]").forEach(b=>b.onclick=()=>{body.classList.toggle("light",b.dataset.theme==="light");$$("[data-theme]").forEach(x=>x.classList.toggle("active",x===b))});
+$$("[data-accent]").forEach(b=>b.onclick=()=>{document.documentElement.style.setProperty("--accent",b.dataset.accent);document.documentElement.style.setProperty("--accent2",b.dataset.accent);document.documentElement.style.setProperty("--soft",b.dataset.accent+"22")});
 </script>
-
 </body>
 </html>
