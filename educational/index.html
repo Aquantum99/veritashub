@@ -149,6 +149,57 @@ body.sidebar-collapsed .sidebar-reopen{display:block}
 @media(max-width:1150px){.hero-inner{grid-template-columns:220px 1fr}.content-grid{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.sidebar{transform:translateX(-100%);box-shadow:15px 0 45px #0008}.sidebar-reopen{display:block}.main{margin-left:0;padding:20px}.hero-inner{grid-template-columns:1fr}.nepo-visual{min-height:230px}.side-stack{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.main{padding:15px}.topbar{flex-wrap:wrap}.welcome{flex-basis:100%}.search{flex:1;width:auto}.hero-content{padding:28px 20px}.composer-bottom{flex-direction:column;align-items:stretch}.start{width:100%}.mode-btn{flex:1}.utility-grid,.side-stack{grid-template-columns:1fr}.journey-empty{align-items:flex-start;flex-direction:column}.empty-action{margin-left:0}.approach,.footer{align-items:flex-start;flex-direction:column}}
+
+/* Neptunus pointer glow */
+.pointer-glow {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle,
+    rgba(169, 140, 255, 0.28) 0%,
+    rgba(118, 80, 255, 0.14) 35%,
+    rgba(118, 80, 255, 0) 72%
+  );
+  transform: translate(-50%, -50%);
+  filter: blur(2px);
+  opacity: 0;
+  transition:
+    width 0.18s ease,
+    height 0.18s ease,
+    opacity 0.2s ease;
+}
+
+.pointer-glow.active {
+  opacity: 1;
+}
+
+.pointer-glow.interactive {
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(
+    circle,
+    rgba(169, 140, 255, 0.38) 0%,
+    rgba(118, 80, 255, 0.18) 38%,
+    rgba(118, 80, 255, 0) 75%
+  );
+}
+
+@media (hover: none), (pointer: coarse) {
+  .pointer-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pointer-glow {
+    transition: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -237,6 +288,47 @@ $$("[data-auth]").forEach(b=>b.onclick=()=>alert("Authentication is not connecte
 $$("[data-support]").forEach(b=>b.onclick=()=>alert("Help & Support will be connected during the platform/backend integration."));
 $$("[data-theme]").forEach(b=>b.onclick=()=>{body.classList.toggle("light",b.dataset.theme==="light");$$("[data-theme]").forEach(x=>x.classList.toggle("active",x===b))});
 $$("[data-accent]").forEach(b=>b.onclick=()=>{document.documentElement.style.setProperty("--accent",b.dataset.accent);document.documentElement.style.setProperty("--accent2",b.dataset.accent);document.documentElement.style.setProperty("--soft",b.dataset.accent+"22")});
+
+/* Neptunus pointer glow */
+const pointerGlow = document.createElement("div");
+pointerGlow.className = "pointer-glow";
+document.body.appendChild(pointerGlow);
+
+let pointerX = 0;
+let pointerY = 0;
+let glowX = 0;
+let glowY = 0;
+
+document.addEventListener("mousemove", (event) => {
+  pointerX = event.clientX;
+  pointerY = event.clientY;
+  pointerGlow.classList.add("active");
+});
+
+document.addEventListener("mouseleave", () => {
+  pointerGlow.classList.remove("active");
+});
+
+document.addEventListener("mouseover", (event) => {
+  if (event.target.closest("button, a, input, textarea")) {
+    pointerGlow.classList.add("interactive");
+  } else {
+    pointerGlow.classList.remove("interactive");
+  }
+});
+
+function animatePointerGlow() {
+  glowX += (pointerX - glowX) * 0.18;
+  glowY += (pointerY - glowY) * 0.18;
+
+  pointerGlow.style.left = `${glowX}px`;
+  pointerGlow.style.top = `${glowY}px`;
+
+  requestAnimationFrame(animatePointerGlow);
+}
+
+animatePointerGlow();
+
 </script>
 </body>
 </html>
