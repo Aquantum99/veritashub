@@ -109,39 +109,41 @@
     z-index: 2;
   }
 
-  /* Veritas Educational link */
+  /* Development status */
+  .development-status {
+    margin-top: 18px;
+
+    font-size: 14px;
+    letter-spacing: 1px;
+
+    color: #8fcfff;
+
+    text-shadow: 0 0 8px #005577;
+
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Veritas Educational - unavailable during development */
   .education-link {
     position: relative;
     z-index: 2;
 
-    margin-top: 28px;
+    margin-top: 18px;
     padding: 12px 24px;
 
-    border: 1px solid #00bfff;
+    border: 1px solid #23546a;
     border-radius: 8px;
 
-    color: #00bfff;
-    background: rgba(0, 191, 255, 0.04);
-
-    text-decoration: none;
+    color: #52788a;
+    background: rgba(0, 191, 255, 0.02);
 
     font-size: 15px;
     letter-spacing: 1px;
 
-    transition:
-      background 0.3s ease,
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
-  }
+    cursor: not-allowed;
 
-  /* Link hover effect */
-  .education-link:hover {
-    background: rgba(0, 191, 255, 0.12);
-
-    box-shadow:
-      0 0 20px rgba(0, 191, 255, 0.35);
-
-    transform: translateY(-2px);
+    opacity: 0.7;
   }
 
   /* Subtle pulse glow behind */
@@ -161,7 +163,6 @@
 
     animation: pulseGlow 5s infinite alternate;
 
-    /* Prevent glow from blocking clicks */
     pointer-events: none;
 
     z-index: 0;
@@ -206,6 +207,10 @@
       font-size: 16px;
     }
 
+    .development-status {
+      font-size: 13px;
+    }
+
     .education-link {
       font-size: 14px;
       padding: 10px 20px;
@@ -226,12 +231,20 @@
     Future is forged with vision and partnership.
   </p>
 
-  <a href="/educational/" class="education-link">
-    Explore Veritas Educational
-  </a>
+  <div class="development-status">
+    Veritas Educational — Currently in development
+  </div>
+
+  <div class="education-link" aria-disabled="true">
+    Veritas Educational — Beta release coming later
+  </div>
 
   <footer>
     © 2026 VeritasHub. All Rights Reserved.
+  </footer>
+
+</body>
+</html>
   </footer>
 
 </body>
